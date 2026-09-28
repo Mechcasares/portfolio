@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { roughArrow, roughEllipse, roughRect, roughUnderline } from "@/lib/rough";
+import { roughArrow, roughEllipse, roughLine, roughRect, roughUnderline } from "@/lib/rough";
 
 type Trigger = "mount" | "view";
 
@@ -124,6 +124,43 @@ export function Underlined({
     <span className="underlined">
       {children}
       <PenBox className="underlined-svg" draw={(w, h) => roughUnderline(w, h * 0.35, seed)} delay={delay} duration={0.8} trigger={trigger} width={2.2} />
+    </span>
+  );
+}
+
+/**
+ * A word crossed out in pen with a handwritten correction above it:
+ * the editing gesture of someone who writes for a living.
+ */
+export function Corrected({
+  from,
+  to,
+  delay = 1.2,
+  trigger = "mount",
+}: {
+  from: string;
+  to: string;
+  delay?: number;
+  trigger?: Trigger;
+}) {
+  const show = { opacity: 1, y: 0, rotate: -4 };
+  const play = trigger === "mount" ? { animate: show } : { whileInView: show, viewport: { once: true } };
+  return (
+    <span className="corrected">
+      <span className="sr-only">{to}</span>
+      <span className="corrected-old" aria-hidden="true">
+        {from}
+        <PenBox className="corrected-strike" draw={(w, h) => roughLine(-4, h * 0.56, w + 4, h * 0.46, 5, 2)} delay={delay} duration={0.5} trigger={trigger} width={4} />
+      </span>
+      <motion.span
+        className="corrected-new hand"
+        aria-hidden="true"
+        initial={{ opacity: 0, y: 10, rotate: -8 }}
+        transition={{ duration: 0.6, delay: delay + 0.45, ease: [0.22, 1, 0.36, 1] }}
+        {...play}
+      >
+        {to}
+      </motion.span>
     </span>
   );
 }

@@ -6,6 +6,7 @@ import { Enter, ParallaxMedia, Reveal, WordReveal } from "./motion";
 import { Visual } from "./Visual";
 import { Rich } from "./Rich";
 import { Badge } from "./Badge";
+import { Scope } from "./Scope";
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
@@ -227,7 +228,9 @@ export function CaseStudy({ project }: { project: Project }) {
       <section className="container cs-context" aria-label={`About ${project.title}`}>
         <Reveal className="cs-context-card">
           <span className="cs-context-tape" aria-hidden="true" />
-          <span className="hand cs-context-label">the company, in short</span>
+          <span className="hand cs-context-label">the project, in short</span>
+          <Scope p={project} />
+          <span className="mono cs-context-sub">About {project.company === "Settle Network" ? project.title : project.company}</span>
           <dl className="cs-context-grid">
             {project.about.items.map((it, i) => (
               <div key={it.label} className="cs-context-item">

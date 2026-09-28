@@ -27,7 +27,7 @@ export function Nav() {
       <nav className="container nav-inner" aria-label="Main">
         <Link href="/" className="nav-name">
           <span className="hand nav-sign">{site.name}</span>
-          <span className="mono">{site.role}</span>
+          <span className="mono">{site.role} <span className="nav-at">@ {site.current.short}</span></span>
         </Link>
         <div className="nav-links">
           <Link className="nav-link" href="/#work">Work</Link>

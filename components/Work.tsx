@@ -5,6 +5,8 @@ import { roughArrow } from "@/lib/rough";
 import { Visual } from "./Visual";
 import { Rich } from "./Rich";
 import { Badge } from "./Badge";
+import { Scope } from "./Scope";
+import { Current } from "./Current";
 
 function Tags({ tags }: { tags: string[] }) {
   return (
@@ -80,10 +82,7 @@ function FeatureStory({ p }: { p: Project }) {
         </div>
         <Reveal className="grid story-foot">
           <p className="story-summary"><Rich text={p.summary} /></p>
-          <dl className="story-facts">
-            <dt>Role</dt><dd>{p.role}</dd>
-            <dt>Company</dt><dd>{p.company}</dd>
-          </dl>
+          <div className="story-scope"><Scope p={p} compact /></div>
           <div className="story-foot-cta">
             <Cta />
           </div>
@@ -109,7 +108,7 @@ function SideStory({ p }: { p: Project }) {
             <span className="mono story-index">{p.index} / {p.category}</span>
             <Title p={p} />
             <p className="story-summary"><Rich text={p.summary} /></p>
-            <Tags tags={p.tags} />
+            <Scope p={p} compact />
             <div style={{ marginTop: 8 }}><Cta /></div>
           </Drift>
         </div>
@@ -126,6 +125,7 @@ export function Work() {
           <h2 id="work-title">Selected work</h2>
           <span className="mono muted">({String(projects.length).padStart(2, "0")})</span>
         </div>
+        <Current />
         <div className="stories">
           {projects.map((p) => {
             if (p.layout === "feature") return <FeatureStory key={p.slug} p={p} />;

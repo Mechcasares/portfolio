@@ -120,7 +120,7 @@ export function Process() {
   const shipped = useTransform(p, [0.72, 0.78], [0, 1]);
   const shippedRotate = useTransform(p, [0.72, 0.78], [-14, -6]);
   const shippedScale = useTransform(p, [0.72, 0.78], [1.25, 1]);
-  const active = useTransform(p, [0, 0.16, 0.36, 0.6, 1], [0, 1, 2, 3, 3]);
+  const active = useTransform(p, [0, 0.12, 0.26, 0.42, 0.66, 1], [0, 1, 2, 3, 4, 4]);
 
   return (
     <section ref={ref} className="process" aria-labelledby="process-title">
@@ -129,7 +129,7 @@ export function Process() {
           <div className="process-head">
             <h2 id="process-title" className="mono">How I work</h2>
             <p className="process-kicker">
-              From a messy first sketch to a <span className="hand-inline">shipped</span> product.
+              From something complex to something that feels <span className="hand-inline">obvious</span>.
             </p>
           </div>
 
