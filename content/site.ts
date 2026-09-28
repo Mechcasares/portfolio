@@ -27,13 +27,9 @@ export const site = {
   links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/mercedescasares" }],
 
   hero: {
-    // Rendered as: lead + [struck word] with a handwritten correction.
-    lead: "I like complicated problems. I make them feel",
-    struck: "complicated.",
-    correction: "obvious.",
+    title: "I untangle complicated products.",
     supporting:
       "I started in **Communication**, learned front end development and ended up designing products. **7+ years** later I still work the same way: find the story, put it in the right order, then build it with engineering until it **feels obvious**. Today I’m the first designer at **CFY**, an **AI powered retail** startup.",
-    note: "Mercedes, a communicator turned product designer",
   },
 
   // COMMUNICATION → STORYTELLING → PRODUCT → DEVELOPMENT → SIMPLICITY

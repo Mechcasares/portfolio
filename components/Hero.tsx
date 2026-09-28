@@ -1,10 +1,9 @@
 import { site } from "@/content/site";
-import { Corrected, Note } from "./hand";
+import { Tangle } from "./Tangle";
 import { Enter, WordReveal } from "./motion";
 import { Rich } from "./Rich";
 
 export function Hero() {
-  const leadDelay = 0.2 + site.hero.lead.split(" ").length * 0.035;
   return (
     <section className="hero container" aria-labelledby="hero-title">
       <Enter delay={0.1} className="hero-meta mono">
@@ -17,11 +16,9 @@ export function Hero() {
       </Enter>
 
       <h1 id="hero-title" className="hero-title">
-        <WordReveal text={site.hero.lead} delay={0.2} onMount />{" "}
-        <Corrected from={site.hero.struck} to={site.hero.correction} delay={leadDelay + 0.5} />
+        <WordReveal text={site.hero.title} delay={0.2} onMount />
       </h1>
-
-      <Note delay={2.4} trigger="mount" className="hero-sign">{site.hero.note}</Note>
+      <Tangle delay={0.8} />
 
       <div className="grid hero-bottom">
         <Enter delay={0.75} as="p" className="hero-support">
