@@ -250,11 +250,12 @@ ul, ol { list-style: none; }
   position: relative;
   display: inline-flex;
   align-items: flex-end;
-  gap: 4px;
-  margin-top: 18px;
-  margin-left: clamp(0px, 24vw, 420px);
+  gap: 6px;
+  margin-top: 10px;
+  margin-left: min(28vw, 400px);
 }
-.hero-note .hand-arrow { position: static; width: 64px; height: 48px; transform: translateY(-14px); }
+.hero-note .hand-arrow { position: static; flex: none; }
+.hero-note .note { transform-origin: left bottom; margin-bottom: -6px; font-size: clamp(22px, 2vw, 30px); }
 
 .hero-bottom {
   margin-top: clamp(40px, 6vw, 88px);
@@ -677,10 +678,10 @@ ul, ol { list-style: none; }
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   margin-top: 28px;
 }
-.contact-row .hand-arrow { position: static; width: 70px; height: 44px; }
+.contact-row .hand-arrow { position: static; flex: none; }
 .contact-address {
   display: inline-block;
   font-size: clamp(17px, 1.6vw, 22px);
@@ -1033,7 +1034,7 @@ div:has(> #work) + .section { padding-block-start: 0; }
   pointer-events: none;
   overflow: visible;
 }
-.hand-arrow { position: absolute; width: 80px; height: 80px; pointer-events: none; }
+.hand-arrow { position: absolute; pointer-events: none; overflow: visible; }
 
 /* Hover-drawn strokes (CSS only): paths use pathLength="1". */
 .draw path {
@@ -1081,8 +1082,8 @@ div:has(> #work) + .section { padding-block-start: 0; }
   margin-top: 6px !important;
   padding-left: clamp(8px, 4vw, 48px);
 }
-.hand-caption .hand-arrow { position: static; width: 48px; height: 48px; flex: none; }
-.hand-caption .note { margin-top: 20px; white-space: normal; font-size: clamp(24px, 2.4vw, 32px); max-width: 26ch; }
+.hand-caption .hand-arrow { position: static; flex: none; }
+.hand-caption .note { margin-top: 26px; white-space: normal; font-size: clamp(24px, 2.4vw, 32px); max-width: 26ch; }
 .stat-value .circled-svg { top: -20%; height: 140%; left: -9%; width: 118%; }
 
 /* ─────────────────────────────────────────────────────────────

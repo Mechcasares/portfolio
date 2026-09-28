@@ -20,7 +20,7 @@ function Figure({ image, sizes }: { image: Img; sizes: string }) {
 function Caption({ text, seed }: { text: string; seed: number }) {
   return (
     <figcaption className="hand-caption">
-      <Arrow from={[70, 92]} to={[30, 12]} bend={0.35} seed={seed} delay={0.2} />
+      <Arrow box={[40, 50]} from={[34, 46]} to={[10, 5]} bend={-0.25} seed={seed} delay={0.2} />
       <Note delay={0.45}>{text}</Note>
     </figcaption>
   );

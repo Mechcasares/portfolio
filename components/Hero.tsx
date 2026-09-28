@@ -23,7 +23,7 @@ export function Hero() {
       </h1>
 
       <div className="hero-note" aria-hidden="true">
-        <Arrow from={[92, 80]} to={[14, 14]} bend={0.3} seed={4} delay={1.6} trigger="mount" />
+        <Arrow box={[70, 56]} from={[64, 50]} to={[10, 6]} bend={-0.3} seed={4} delay={1.6} trigger="mount" />
         <Note delay={1.9} trigger="mount">{site.hero.note}</Note>
       </div>
 

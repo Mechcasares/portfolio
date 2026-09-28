@@ -62,7 +62,7 @@ export function Contact() {
           </a>
         </Reveal>
         <div className="contact-row">
-          <Arrow from={[6, 20]} to={[92, 64]} bend={-0.3} seed={12} delay={0.9} />
+          <Arrow box={[88, 36]} from={[4, 4]} to={[82, 19]} bend={0.22} seed={12} delay={0.9} />
           <a className="contact-address" href={`mailto:${site.email}`}>
             {site.email}
           </a>

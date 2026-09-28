@@ -135,10 +135,14 @@ export function PenFrame({ seed = 21, delay = 0.2 }: { seed?: number; delay?: nu
   );
 }
 
-/** A hand-drawn arrow inside its own box. Coordinates are in a 100×100 space. */
+/**
+ * A hand-drawn arrow. `box` is its size in px and coordinates are in that same
+ * space, so the drawing is never squashed and the tip lands where it's aimed.
+ */
 export function Arrow({
   from,
   to,
+  box = [100, 100],
   bend = 0.25,
   seed = 1,
   delay = 0.4,
@@ -148,6 +152,7 @@ export function Arrow({
 }: {
   from: [number, number];
   to: [number, number];
+  box?: [number, number];
   bend?: number;
   seed?: number;
   delay?: number;
@@ -156,8 +161,15 @@ export function Arrow({
   style?: CSSProperties;
 }) {
   return (
-    <svg className={`pen hand-arrow ${className}`} viewBox="0 0 100 100" style={style} aria-hidden="true">
-      <Stroke d={roughArrow(from[0], from[1], to[0], to[1], bend, seed)} delay={delay} duration={0.7} trigger={trigger} width={2.8} />
+    <svg
+      className={`pen hand-arrow ${className}`}
+      viewBox={`0 0 ${box[0]} ${box[1]}`}
+      width={box[0]}
+      height={box[1]}
+      style={style}
+      aria-hidden="true"
+    >
+      <Stroke d={roughArrow(from[0], from[1], to[0], to[1], bend, seed)} delay={delay} duration={0.7} trigger={trigger} width={2} />
     </svg>
   );
 }
