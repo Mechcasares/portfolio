@@ -187,9 +187,8 @@ export const projects: Project[] = [
         blocks: [
           {
             kind: "image",
-            image: { src: ping("invoice-sent.png"), alt: "Ping invoice sent confirmation", width: 1126, height: 720 },
+            image: { src: ping("invoice-sent-clean.png"), alt: "Ping invoice sent confirmation", width: 924, height: 704, fit: "contain" },
             caption: "what was sent, to who, how much. no guessing",
-            placement: "bleed",
           },
           {
             kind: "image",

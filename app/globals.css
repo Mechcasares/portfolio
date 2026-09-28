@@ -1554,3 +1554,5 @@ div:has(> #work) + .section { padding-block-start: 0; }
   .hero-note { margin-left: 8vw; max-width: calc(100% - 8vw); }
   .hero-note .note { white-space: normal; line-height: 1.2; }
 }
+/* Screenshots shown whole get soft window corners on the canvas */
+.img-contain { border-radius: 14px; filter: drop-shadow(0 18px 28px rgba(20, 20, 19, 0.14)); }
