@@ -5,6 +5,7 @@ import { Arrow, Circled, Note, Underlined } from "./hand";
 import { Enter, ParallaxMedia, Reveal, WordReveal } from "./motion";
 import { Visual } from "./Visual";
 import { Rich } from "./Rich";
+import { Badge } from "./Badge";
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
@@ -200,7 +201,7 @@ export function CaseStudy({ project }: { project: Project }) {
           </h1>
           <Enter delay={0.9} className="cs-badges">
             {project.badges.map((b) => (
-              <span key={b} className="sticker sticker--warm">{b}</span>
+              <Badge key={b} label={b} />
             ))}
           </Enter>
         </div>

@@ -4,6 +4,7 @@ import { Drift, Enter, ParallaxMedia, Reveal } from "./motion";
 import { roughArrow } from "@/lib/rough";
 import { Visual } from "./Visual";
 import { Rich } from "./Rich";
+import { Badge } from "./Badge";
 
 function Tags({ tags }: { tags: string[] }) {
   return (
@@ -41,8 +42,8 @@ function Title({ p, style }: { p: Project; style?: React.CSSProperties }) {
 function Badges({ p }: { p: Project }) {
   return (
     <div className="story-badges" aria-label="Highlights">
-      {p.badges.map((b, i) => (
-        <span key={b} className={`sticker sticker--${i % 2 ? "pen" : "warm"}`}>{b}</span>
+      {p.badges.map((b) => (
+        <Badge key={b} label={b} />
       ))}
     </div>
   );
