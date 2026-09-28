@@ -80,10 +80,10 @@ export const projects: Project[] = [
     badges: ["Y Combinator S22"],
     about: {
       items: [
-        { label: "What", value: "Global neobank for contractors and freelancers" },
-        { label: "Founded", value: "2021, Buenos Aires" },
-        { label: "Backed by", value: "Y Combinator (S22), $15M seed in 2022" },
-        { label: "Reach", value: "Users in 16 countries at seed" },
+        { label: "What", value: "Global **neobank** for contractors and freelancers" },
+        { label: "Founded", value: "**2021** in Buenos Aires" },
+        { label: "Backed by", value: "Y Combinator S22 and a **$15M** seed (2022)" },
+        { label: "Reach", value: "Users in **16 countries** at seed" },
       ],
       sources: [
         { label: "Ping on Y Combinator", href: "https://www.ycombinator.com/companies/ping" },
@@ -268,10 +268,10 @@ export const projects: Project[] = [
     badges: ["Y Combinator S15"],
     about: {
       items: [
-        { label: "What", value: "Workplace platform for hybrid offices" },
-        { label: "Founded", value: "2015, San Francisco" },
-        { label: "Backed by", value: "Y Combinator (S15), $25M Series B in 2019" },
-        { label: "Products", value: "Desk booking, rooms, visitors, ticketing, deliveries" },
+        { label: "What", value: "Workplace platform for **hybrid offices**" },
+        { label: "Founded", value: "**2015** in San Francisco" },
+        { label: "Backed by", value: "Y Combinator S15 and a **$25M** Series B (2019)" },
+        { label: "Products", value: "Desks, rooms, visitors, tickets and deliveries" },
       ],
       sources: [
         { label: "Eden on Y Combinator", href: "https://www.ycombinator.com/companies/eden" },

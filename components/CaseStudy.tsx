@@ -226,12 +226,16 @@ export function CaseStudy({ project }: { project: Project }) {
 
       <section className="container cs-context" aria-label={`About ${project.title}`}>
         <Reveal className="cs-context-card">
+          <span className="cs-context-tape" aria-hidden="true" />
           <span className="hand cs-context-label">the company, in short</span>
           <dl className="cs-context-grid">
-            {project.about.items.map((it) => (
-              <div key={it.label}>
-                <dt className="mono">{it.label}</dt>
-                <dd>{it.value}</dd>
+            {project.about.items.map((it, i) => (
+              <div key={it.label} className="cs-context-item">
+                <dt className="mono">
+                  <span className="cs-context-num">{String(i + 1).padStart(2, "0")}</span>
+                  {it.label}
+                </dt>
+                <dd><Rich text={it.value} /></dd>
               </div>
             ))}
           </dl>

@@ -1164,32 +1164,67 @@ div:has(> #work) + .section { padding-block-start: 0; }
 .cs-title-row { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
 .cs-badges { padding-bottom: clamp(10px, 1.6vw, 24px); transform: rotate(-4deg); }
 
-.cs-context { margin-top: clamp(36px, 5vw, 64px); }
+.cs-context { margin-top: clamp(48px, 6vw, 80px); }
 .cs-context-card {
   position: relative;
-  padding: clamp(22px, 3vw, 36px) clamp(20px, 3vw, 40px);
-  background: color-mix(in srgb, var(--warm) 14%, var(--bg));
-  border-radius: 28px 6px 34px 8px;
+  padding: clamp(28px, 3vw, 40px) clamp(20px, 2.6vw, 36px) clamp(22px, 2.4vw, 30px);
+  background:
+    linear-gradient(color-mix(in srgb, var(--warm) 9%, #fbf9f4), color-mix(in srgb, var(--warm) 9%, #fbf9f4)) padding-box;
+  border: 1px solid color-mix(in srgb, var(--warm) 30%, var(--line));
+  border-radius: 4px 4px 22px 4px;
+  box-shadow: 0 1px 0 rgba(20, 20, 19, 0.03), 0 18px 36px -28px rgba(20, 20, 19, 0.35);
+}
+/* A strip of tape holding the label */
+.cs-context-tape {
+  position: absolute;
+  top: -12px;
+  left: clamp(14px, 2.2vw, 30px);
+  width: 212px;
+  height: 30px;
+  background: color-mix(in srgb, var(--warm) 50%, transparent);
+  mix-blend-mode: multiply;
+  transform: rotate(-2.5deg);
+  clip-path: polygon(1% 8%, 99% 0, 100% 92%, 0 100%);
 }
 .cs-context-label {
   position: absolute;
-  top: -16px;
-  left: clamp(20px, 3vw, 40px);
-  font-size: 20px;
+  top: -10px;
+  left: clamp(26px, 2.8vw, 42px);
+  font-size: 19px;
   color: var(--pen);
-  transform: rotate(-3deg);
-  background: var(--bg);
-  padding: 0 8px;
-  border-radius: 6px;
+  transform: rotate(-2.5deg);
 }
 .cs-context-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px 32px;
 }
-@media (max-width: 859px) { .cs-context-grid { grid-template-columns: 1fr 1fr; } }
-.cs-context-grid dt { color: var(--pen); margin-bottom: 6px; }
-.cs-context-grid dd { font-size: 15.5px; line-height: 1.4; }
+.cs-context-item { padding: 4px clamp(14px, 1.8vw, 26px); }
+.cs-context-item:first-child { padding-left: 0; }
+.cs-context-item + .cs-context-item { border-left: 1px dashed color-mix(in srgb, var(--pen) 28%, var(--line-strong)); }
+.cs-context-grid dt {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.cs-context-num { color: var(--pen); }
+.cs-context-grid dd {
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.cs-context-grid .kw { background-size: 100% 0.42em; }
+@media (max-width: 859px) {
+  .cs-context-grid { grid-template-columns: 1fr 1fr; row-gap: 20px; }
+  .cs-context-item:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 480px) {
+  .cs-context-grid { grid-template-columns: 1fr; }
+  .cs-context-item { padding-left: 0 !important; border-left: 0 !important; }
+  .cs-context-item + .cs-context-item { border-top: 1px dashed var(--line-strong); padding-top: 16px; }
+}
 
 .cs-sources {
   display: flex;
