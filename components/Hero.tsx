@@ -1,6 +1,5 @@
 import { site } from "@/content/site";
 import { Arrow, Circled, Note } from "./hand";
-import { HeroMark } from "./HeroMark";
 import { Enter, WordReveal } from "./motion";
 import { Rich } from "./Rich";
 
@@ -17,15 +16,12 @@ export function Hero() {
         <span>{site.focus}</span>
       </Enter>
 
-      <div className="hero-top">
       <h1 id="hero-title" className="hero-title">
         <WordReveal text={site.hero.lead} delay={0.2} onMount />{" "}
         <Circled seed={7} delay={leadDelay + 0.5} trigger="mount">
           <WordReveal text={site.hero.accent} delay={leadDelay} onMount />
         </Circled>
       </h1>
-      <HeroMark />
-      </div>
 
       <div className="hero-note" aria-hidden="true">
         <Arrow box={[70, 56]} from={[64, 50]} to={[10, 6]} bend={-0.3} seed={4} delay={1.6} trigger="mount" />
