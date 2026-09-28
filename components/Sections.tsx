@@ -3,6 +3,7 @@ import { site } from "@/content/site";
 import { Arrow, Note, PenFrame, Underlined } from "./hand";
 import { LocalTime } from "./LocalTime";
 import { Reveal } from "./motion";
+import { Rich } from "./Rich";
 
 export function About() {
   return (
@@ -37,12 +38,12 @@ export function About() {
                 </div>
               ))}
               <dt>Who am I?</dt>
-              <dd>{site.about.who}</dd>
+              <dd><Rich text={site.about.who} /></dd>
             </dl>
           </Reveal>
           <Reveal className="about-body" delay={0.1}>
             {site.about.body.map((b) => (
-              <p key={b.slice(0, 24)}>{b}</p>
+              <p key={b.slice(0, 24)}><Rich text={b} /></p>
             ))}
           </Reveal>
         </div>

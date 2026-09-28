@@ -4,6 +4,7 @@ import { CaseNav } from "./CaseNav";
 import { Arrow, Circled, Note, Underlined } from "./hand";
 import { Enter, ParallaxMedia, Reveal, WordReveal } from "./motion";
 import { Visual } from "./Visual";
+import { Rich } from "./Rich";
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
@@ -57,7 +58,7 @@ function BlockView({ block, index }: { block: Block; index: number }) {
   switch (block.kind) {
     case "image":
       return (
-        <figure className="cs-figure">
+        <figure className={`cs-figure cs-figure--${block.placement ?? "full"}${block.tape ? " taped" : ""}`}>
           <Figure image={block.image} sizes="(min-width: 960px) 70vw, 100vw" />
           {block.caption && <Caption text={block.caption} seed={index * 7 + 3} />}
         </figure>
@@ -119,7 +120,7 @@ function BlockView({ block, index }: { block: Block; index: number }) {
           {block.items.map((it, i) => (
             <Reveal key={it.title} as="li" delay={i * 0.08}>
               <h4>{it.title}</h4>
-              <p>{it.body}</p>
+              <p><Rich text={it.body} /></p>
             </Reveal>
           ))}
         </ul>
@@ -157,7 +158,7 @@ function SectionView({ section, index }: { section: Section; index: number }) {
       {section.body && (
         <Reveal className="cs-text">
           {section.body.map((b) => (
-            <p key={b.slice(0, 32)}>{b}</p>
+            <p key={b.slice(0, 32)}><Rich text={b} /></p>
           ))}
         </Reveal>
       )}
@@ -193,11 +194,18 @@ export function CaseStudy({ project }: { project: Project }) {
           <span>{project.index}</span>
           <span>{project.category}</span>
         </Enter>
-        <h1 className="cs-title">
-          <WordReveal text={project.title} delay={0.18} stagger={0.06} onMount />
-        </h1>
+        <div className="cs-title-row">
+          <h1 className="cs-title">
+            <WordReveal text={project.title} delay={0.18} stagger={0.06} onMount />
+          </h1>
+          <Enter delay={0.9} className="cs-badges">
+            {project.badges.map((b) => (
+              <span key={b} className="sticker sticker--warm">{b}</span>
+            ))}
+          </Enter>
+        </div>
         <div className="grid cs-intro">
-          <Enter delay={0.45} as="p" className="cs-summary">{project.summary}</Enter>
+          <Enter delay={0.45} as="p" className="cs-summary"><Rich text={project.summary} /></Enter>
           <Enter delay={0.55} className="cs-facts">
             {facts.map(([k, v]) => (
               <dl key={k}>
@@ -215,12 +223,36 @@ export function CaseStudy({ project }: { project: Project }) {
         </ParallaxMedia>
       </Enter>
 
+      <section className="container cs-context" aria-label={`About ${project.title}`}>
+        <Reveal className="cs-context-card">
+          <span className="hand cs-context-label">the company, in short</span>
+          <dl className="cs-context-grid">
+            {project.about.items.map((it) => (
+              <div key={it.label}>
+                <dt className="mono">{it.label}</dt>
+                <dd>{it.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+      </section>
+
       <div className="container grid cs-body">
         <CaseNav sections={project.sections.map((s) => ({ id: s.id, title: s.title }))} />
         <div className="cs-content">
           {project.sections.map((s, i) => (
             <SectionView key={s.id} section={s} index={i} />
           ))}
+          <aside className="cs-sources" aria-label="Sources">
+            <span className="mono">Sources</span>
+            <ul>
+              {project.about.sources.map((src) => (
+                <li key={src.href}>
+                  <a href={src.href} target="_blank" rel="noreferrer">{src.label} ↗</a>
+                </li>
+              ))}
+            </ul>
+          </aside>
         </div>
       </div>
 

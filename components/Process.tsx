@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring, useTransform, type MotionValue } from "mo
 import { useRef } from "react";
 import { roughArrow, roughEllipse, roughLine, roughRect } from "@/lib/rough";
 import { site } from "@/content/site";
+import { Rich } from "./Rich";
 
 // Sketch coordinates match the real screenshot (1126 × 720), so the wipe lines up.
 // The source image is cut off on the left and has marks in the corners, so we
@@ -198,7 +199,7 @@ function Step({ index, active, title, body }: { index: number; active: MotionVal
       <span className="mono">{String(index + 1).padStart(2, "0")}</span>
       <div>
         <h3>{title}</h3>
-        <p>{body}</p>
+        <p><Rich text={body} /></p>
       </div>
     </motion.li>
   );

@@ -3,6 +3,7 @@ import { projects, type Project } from "@/content/projects";
 import { Drift, Enter, ParallaxMedia, Reveal } from "./motion";
 import { roughArrow } from "@/lib/rough";
 import { Visual } from "./Visual";
+import { Rich } from "./Rich";
 
 function Tags({ tags }: { tags: string[] }) {
   return (
@@ -37,6 +38,16 @@ function Title({ p, style }: { p: Project; style?: React.CSSProperties }) {
   );
 }
 
+function Badges({ p }: { p: Project }) {
+  return (
+    <div className="story-badges" aria-label="Highlights">
+      {p.badges.map((b, i) => (
+        <span key={b} className={`sticker sticker--${i % 2 ? "pen" : "warm"}`}>{b}</span>
+      ))}
+    </div>
+  );
+}
+
 function Cta({ label = "View case study" }: { label?: string }) {
   return (
     <span className="story-cta">
@@ -60,11 +71,14 @@ function FeatureStory({ p }: { p: Project }) {
             <Tags tags={p.tags} />
           </div>
         </Reveal>
-        <ParallaxMedia className="ratio-16-9">
-          <Visual image={p.cover} priority sizes="(min-width: 1440px) 1344px, 100vw" />
-        </ParallaxMedia>
+        <div className="story-cover">
+          <Badges p={p} />
+          <ParallaxMedia className="ratio-16-9">
+            <Visual image={p.cover} priority sizes="(min-width: 1440px) 1344px, 100vw" />
+          </ParallaxMedia>
+        </div>
         <Reveal className="grid story-foot">
-          <p className="story-summary">{p.summary}</p>
+          <p className="story-summary"><Rich text={p.summary} /></p>
           <dl className="story-facts">
             <dt>Role</dt><dd>{p.role}</dd>
             <dt>Company</dt><dd>{p.company}</dd>
@@ -84,7 +98,8 @@ function SideStory({ p }: { p: Project }) {
     <article className={`story story--side ${side}`}>
       <Link href={`/work/${p.slug}`} className="story-link">
         <div className="grid story-body">
-          <Reveal className="story-media" y={32}>
+          <Reveal className="story-media story-cover" y={32}>
+            <Badges p={p} />
             <ParallaxMedia className="ratio-16-9">
               <Visual image={p.cover} sizes="(min-width: 720px) 66vw, 100vw" />
             </ParallaxMedia>
@@ -92,7 +107,7 @@ function SideStory({ p }: { p: Project }) {
           <Drift className="story-text" distance={28}>
             <span className="mono story-index">{p.index} / {p.category}</span>
             <Title p={p} />
-            <p className="story-summary">{p.summary}</p>
+            <p className="story-summary"><Rich text={p.summary} /></p>
             <Tags tags={p.tags} />
             <div style={{ marginTop: 8 }}><Cta /></div>
           </Drift>
