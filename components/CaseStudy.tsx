@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getNextProject, type Block, type Img, type Project, type Section } from "@/content/projects";
 import { CaseNav } from "./CaseNav";
+import { Arrow, Circled, Note, Underlined } from "./hand";
 import { Enter, ParallaxMedia, Reveal, WordReveal } from "./motion";
 import { Visual } from "./Visual";
 
@@ -15,12 +16,34 @@ function Figure({ image, sizes }: { image: Img; sizes: string }) {
   );
 }
 
-function Caption({ label, text }: { label: string; text: string }) {
+// Captions read like notes scribbled next to a print: a small arrow up to the image.
+function Caption({ text, seed }: { text: string; seed: number }) {
   return (
-    <figcaption>
-      <span className="mono">{label}</span>
-      <span>{text}</span>
+    <figcaption className="hand-caption">
+      <Arrow from={[70, 92]} to={[30, 12]} bend={0.35} seed={seed} delay={0.2} />
+      <Note delay={0.45}>{text}</Note>
     </figcaption>
+  );
+}
+
+// Lead with an optional phrase underlined in red pen.
+function Lead({ text, mark, seed }: { text: string; mark?: string; seed: number }) {
+  const at = mark ? text.indexOf(mark) : -1;
+  if (at < 0) {
+    return (
+      <p className="cs-lead">
+        <WordReveal text={text} stagger={0.018} />
+      </p>
+    );
+  }
+  return (
+    <Reveal>
+      <p className="cs-lead">
+        {text.slice(0, at)}
+        <Underlined seed={seed} delay={0.5}>{mark}</Underlined>
+        {text.slice(at + mark!.length)}
+      </p>
+    </Reveal>
   );
 }
 
@@ -30,7 +53,7 @@ function BlockView({ block, index }: { block: Block; index: number }) {
       return (
         <figure className="cs-figure">
           <Figure image={block.image} sizes="(min-width: 960px) 70vw, 100vw" />
-          {block.caption && <Caption label={`Fig. ${num(index)}`} text={block.caption} />}
+          {block.caption && <Caption text={block.caption} seed={index * 7 + 3} />}
         </figure>
       );
     case "gallery":
@@ -43,16 +66,16 @@ function BlockView({ block, index }: { block: Block; index: number }) {
               </Reveal>
             ))}
           </div>
-          {block.caption && <Caption label={`Fig. ${num(index)}`} text={block.caption} />}
+          {block.caption && <Caption text={block.caption} seed={index * 7 + 3} />}
         </figure>
       );
     case "stats":
       return (
         <Reveal>
           <dl className="stats">
-            {block.items.map((st) => (
+            {block.items.map((st, i) => (
               <div key={st.label} className="stat">
-                <dd className="stat-value">{st.value}</dd>
+                <dd className="stat-value">{i === 0 ? <Circled seed={5} delay={0.4}>{st.value}</Circled> : st.value}</dd>
                 <dt className="mono muted">{st.label}</dt>
               </div>
             ))}
@@ -108,11 +131,7 @@ function SectionView({ section, index }: { section: Section; index: number }) {
         <span className="mono num">{num(index)}</span>
         <h2 id={`${section.id}-title`} className="mono">{section.title}</h2>
       </Reveal>
-      {section.lead && (
-        <p className="cs-lead">
-          <WordReveal text={section.lead} stagger={0.018} />
-        </p>
-      )}
+      {section.lead && <Lead text={section.lead} mark={section.mark} seed={index + 11} />}
       {section.body && (
         <Reveal className="cs-text">
           {section.body.map((b) => (
@@ -185,7 +204,7 @@ export function CaseStudy({ project }: { project: Project }) {
 
       <div className="container cs-next">
         <Link href={`/work/${next.slug}`}>
-          <span className="mono muted">Next project — {next.index}</span>
+          <span className="mono muted">Next project · {next.index}</span>
           <div className="cs-next-title">
             <span>{next.title}</span>
             <span className="arrow" aria-hidden="true">→</span>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { projects, type Project } from "@/content/projects";
 import { Drift, Enter, ParallaxMedia, Reveal } from "./motion";
+import { roughArrow } from "@/lib/rough";
 import { Visual } from "./Visual";
 
 function Tags({ tags }: { tags: string[] }) {
@@ -10,6 +11,29 @@ function Tags({ tags }: { tags: string[] }) {
         <li key={t} className="tag">{t}</li>
       ))}
     </ul>
+  );
+}
+
+// Red pen arrow + handwritten note, drawn on hover (CSS only).
+function HoverNote({ note, seed }: { note: string; seed: number }) {
+  return (
+    <span className="hover-note" aria-hidden="true">
+      <svg className="pen draw" viewBox="0 0 100 60">
+        <path d={roughArrow(6, 44, 92, 22, -0.3, seed)} pathLength={1} fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" />
+      </svg>
+      <span className="note draw-note">{note}</span>
+    </span>
+  );
+}
+
+function Title({ p, style }: { p: Project; style?: React.CSSProperties }) {
+  return (
+    <h3 className="story-title" style={style}>
+      <span className="story-title-wrap">
+        {p.title}
+        <HoverNote note={p.note} seed={Number(p.index)} />
+      </span>
+    </h3>
   );
 }
 
@@ -28,8 +52,8 @@ function FeatureStory({ p }: { p: Project }) {
       <Link href={`/work/${p.slug}`} className="story-link">
         <Reveal className="story-head">
           <div>
-            <span className="mono story-index">{p.index} — {p.category}</span>
-            <h3 className="story-title" style={{ marginTop: 14 }}>{p.title}</h3>
+            <span className="mono story-index">{p.index} / {p.category}</span>
+            <Title p={p} style={{ marginTop: 14 }} />
           </div>
           <div className="story-head-side">
             <span className="mono muted">{p.year}</span>
@@ -66,8 +90,8 @@ function SideStory({ p }: { p: Project }) {
             </ParallaxMedia>
           </Reveal>
           <Drift className="story-text" distance={28}>
-            <span className="mono story-index">{p.index} — {p.category}</span>
-            <h3 className="story-title">{p.title}</h3>
+            <span className="mono story-index">{p.index} / {p.category}</span>
+            <Title p={p} />
             <p className="story-summary">{p.summary}</p>
             <Tags tags={p.tags} />
             <div style={{ marginTop: 8 }}><Cta /></div>

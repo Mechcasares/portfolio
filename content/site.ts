@@ -1,5 +1,5 @@
 // Global copy for the site. Everything here is meant to be edited.
-// Don't name the current employer anywhere on the site.
+// House rules: don't name the current employer, and no dashes in the copy.
 
 export const site = {
   name: "Mercedes Casares",
@@ -8,67 +8,52 @@ export const site = {
   location: "Buenos Aires",
   focus: "B2B SaaS & AI",
   email: "casaresmmercedes@gmail.com",
-  links: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/mercedescasares" },
-  ],
+  links: [{ label: "LinkedIn", href: "https://www.linkedin.com/in/mercedescasares" }],
 
   hero: {
-    // Rendered as: lead + <em>accent</em> + tail
+    // Rendered as: lead + circled accent
     lead: "Product designer making complex products",
     accent: "feel simple.",
     supporting:
-      "Seven years designing digital products end to end — framing the problem, shaping the strategy, then the UX, interface and systems that carry it. Lately that means AI-powered products, built side by side with engineering, and sometimes directly in code.",
+      "I’ve spent 7+ years designing digital products from the first question to the last detail: strategy, UX, interface and the systems behind them. These days I work on B2B SaaS and AI products, close to engineering and sometimes directly in code.",
+    note: "from sketch to shipped",
   },
 
-  about: {
-    intro:
-      "I’m a product designer who likes the unglamorous middle of the work: the moment a product has grown too many edge cases, too many settings and too many opinions, and someone has to decide what it actually is.",
-    body: [
-      "I studied Communication at UCA before moving into product, and I still design with a background in front-end development — which is why I’m usually the designer closest to engineering, and why I care about the component library as much as the hero screen.",
-      "I designed B2B tools for hybrid workspaces at Eden, and worked across fintech and SaaS products at Settle Network — including Ping, which grew to 20,000+ users and $10M+ in monthly volume. Right now I’m focused on B2B SaaS and AI products.",
-    ],
-    principles: [
-      {
-        title: "Start with the decision, not the screen",
-        body: "Most interface problems are unmade product decisions. I try to name them first.",
-      },
-      {
-        title: "Fewer, stronger patterns",
-        body: "A system with ten components used well beats forty used once.",
-      },
-      {
-        title: "Design in the medium",
-        body: "Real data, real constraints, real code when it helps. Mockups are a means, not the deliverable.",
-      },
-    ],
-  },
-
-  capabilities: [
+  process: [
     {
-      label: "Product strategy",
-      body: "Framing problems, defining scope and sequencing bets with product and leadership.",
+      title: "Explore",
+      body: "Questions, sketches and messy flows. Most of the work is figuring out what the problem actually is.",
     },
     {
-      label: "UX & workflows",
-      body: "Untangling complex, multi-step workflows into flows people can hold in their head.",
+      title: "Define",
+      body: "Wireframes, decisions and the system underneath. Fewer, stronger patterns.",
     },
     {
-      label: "Interface design",
-      body: "Precise, quiet UI with a clear hierarchy — craft in service of comprehension.",
+      title: "Design",
+      body: "Precise UI with a clear hierarchy, where craft is there to make things easier to understand.",
     },
     {
-      label: "Design systems",
-      body: "Tokens, components and documentation that engineering actually adopts.",
-    },
-    {
-      label: "AI products",
-      body: "Designing for probabilistic output: trust, explanation, control and recovery.",
-    },
-    {
-      label: "Engineering collaboration",
-      body: "Working in the same repo when useful — prototyping, reviewing and shipping details.",
+      title: "Ship",
+      body: "I work in the same repo as engineering when it helps, so details get shipped instead of handed off.",
     },
   ],
+
+  about: {
+    title: "about me:",
+    facts: [
+      { label: "Name", value: "Mercedes Casares" },
+      { label: "Based in", value: "Buenos Aires, Argentina" },
+      { label: "Experience", value: "7+ years in product design" },
+      { label: "Studied", value: "Communication at UCA" },
+      { label: "Background", value: "Front end development" },
+      { label: "Focus", value: "B2B SaaS and AI products" },
+    ],
+    who: "A product designer who likes the messy middle of the work: the moment a product has too many edge cases, too many settings and too many opinions, and someone has to decide what it actually is.",
+    body: [
+      "I designed B2B tools for hybrid workspaces at Eden, and worked on fintech and SaaS products at Settle Network, including Ping, which grew to 20,000+ users and $10M+ in monthly volume.",
+      "Coming from front end development, I’m usually the designer closest to engineering. I care about the component library as much as the hero screen.",
+    ],
+  },
 };
 
 export type Site = typeof site;

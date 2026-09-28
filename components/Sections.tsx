@@ -1,89 +1,69 @@
 import Image from "next/image";
 import { site } from "@/content/site";
+import { Arrow, Note, PenFrame, Underlined } from "./hand";
 import { LocalTime } from "./LocalTime";
-import { Reveal, WordReveal } from "./motion";
-
-export function Capabilities() {
-  return (
-    <section className="section container" aria-labelledby="cap-title">
-      <div className="section-head">
-        <h2 id="cap-title">How I work</h2>
-        <span className="mono muted">Strategy → Systems</span>
-      </div>
-      <div className="grid">
-        <div className="cap-intro">
-          <span className="mono muted">Beyond the screen</span>
-          <h3>
-            From the first question to the <em>last pixel</em> — and the pull request.
-          </h3>
-        </div>
-        <ol className="cap-list">
-          {site.capabilities.map((c, i) => (
-            <Reveal key={c.label} as="li" className="cap-item" delay={i * 0.04}>
-              <span className="mono">{String(i + 1).padStart(2, "0")}</span>
-              <h4>{c.label}</h4>
-              <p>{c.body}</p>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
+import { Reveal } from "./motion";
 
 export function About() {
   return (
     <section id="about" className="section container" aria-labelledby="about-title">
       <div className="section-head">
         <h2 id="about-title">About</h2>
-        <span className="mono muted">7+ years</span>
+        <span className="mono muted">
+          {site.location} · <LocalTime />
+        </span>
       </div>
-      <div className="grid">
-        <p className="about-lead">
-          <WordReveal text={site.about.intro} stagger={0.012} />
-        </p>
-        <Reveal className="about-side mono">
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <span>{site.location}</span>
-            <LocalTime />
+
+      <Reveal>
+        <p className="about-title" aria-hidden="true">{site.about.title}</p>
+      </Reveal>
+
+      <div className="grid about-sheet">
+        <Reveal className="about-photo" y={16}>
+          <PenFrame />
+          <div className="about-photo-img">
+            <Image src="/images/about/mercedes-bw.webp" alt={site.fullName} width={2000} height={2000} sizes="(min-width: 720px) 34vw, 100vw" />
           </div>
-          <div className="about-photo">
-            <Image src="/images/about/mercedes.png" alt={site.fullName} width={845} height={1163} sizes="260px" />
-          </div>
+          <Note delay={1.4}>hi! that’s me</Note>
         </Reveal>
-        <Reveal className="about-body">
-          {site.about.body.map((b) => (
-            <p key={b.slice(0, 24)}>{b}</p>
-          ))}
-        </Reveal>
-      </div>
-      <div className="grid principles">
-        {site.about.principles.map((pr, i) => (
-          <Reveal key={pr.title} className="principle" delay={i * 0.08}>
-            <span className="mono muted">{String(i + 1).padStart(2, "0")}</span>
-            <h4>{pr.title}</h4>
-            <p>{pr.body}</p>
+
+        <div className="about-card">
+          <Reveal>
+            <dl className="facts">
+              {site.about.facts.map((f) => (
+                <div key={f.label} style={{ display: "contents" }}>
+                  <dt>{f.label}:</dt>
+                  <dd>{f.value}</dd>
+                </div>
+              ))}
+              <dt>Who am I?</dt>
+              <dd>{site.about.who}</dd>
+            </dl>
           </Reveal>
-        ))}
+          <Reveal className="about-body" delay={0.1}>
+            {site.about.body.map((b) => (
+              <p key={b.slice(0, 24)}>{b}</p>
+            ))}
+          </Reveal>
+        </div>
       </div>
     </section>
   );
 }
 
 export function Contact() {
-  const [user] = site.email.split("@");
   return (
     <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="container">
         <h2 id="contact-title" className="mono contact-lead">Contact</h2>
         <Reveal>
           <a className="contact-mail" href={`mailto:${site.email}`}>
-            <span>Let’s <em>talk</em></span>
-            <span className="arrow" aria-hidden="true">↗</span>
+            Let’s <Underlined seed={9} delay={0.5}>talk</Underlined>
           </a>
         </Reveal>
-        <div>
-          <a className="contact-address" href={`mailto:${site.email}`} aria-label={`Email ${user}`}>
+        <div className="contact-row">
+          <Arrow from={[6, 20]} to={[92, 64]} bend={-0.3} seed={12} delay={0.9} />
+          <a className="contact-address" href={`mailto:${site.email}`}>
             {site.email}
           </a>
         </div>

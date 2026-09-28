@@ -1,8 +1,8 @@
 // Project + case study content.
 //
 // Copy and images come from Mercedes' own case study material. Sections are
-// only included where there's something real to say — no forced sections,
-// no invented metrics.
+// only included where there's something real to say. No forced sections,
+// no invented metrics, no dashes in the copy.
 
 export type Img = {
   src: string;
@@ -26,6 +26,8 @@ export type Section = {
   id: string;
   title: string;
   lead?: string;
+  /** Phrase inside the lead that gets a red pen underline. */
+  mark?: string;
   body?: string[];
   blocks?: Block[];
 };
@@ -41,6 +43,8 @@ export type Project = {
   company: string;
   tags: string[];
   layout: "feature" | "media-left" | "media-right";
+  /** Handwritten note that appears on hover. */
+  note: string;
   cover: Img;
   sections: Section[];
 };
@@ -55,12 +59,13 @@ export const projects: Project[] = [
     title: "Ping",
     category: "Fintech / Crypto",
     summary:
-      "Crypto payments that work like payments — a product and design system for fiat and crypto, built to feel like a bank app.",
-    year: "2024 — 2026",
+      "Crypto payments that work like payments. A product and design system for fiat and crypto, built to feel like a bank app.",
+    year: "2024 to 2026",
     role: "Product Designer",
     company: "Settle Network",
     tags: ["Product Design", "Design Systems", "Fintech", "Mobile & Desktop"],
     layout: "feature",
+    note: "20k+ users, $10M+ a month",
     cover: { src: ping("cover.png"), alt: "Ping brand and product overview", width: 1920, height: 1080, fit: "contain" },
     sections: [
       {
@@ -76,7 +81,7 @@ export const projects: Project[] = [
             items: [
               { label: "Role", value: "Product Designer" },
               { label: "Company", value: "Settle Network" },
-              { label: "Timeline", value: "2024 — 2026" },
+              { label: "Timeline", value: "2024 to 2026" },
               { label: "Platforms", value: "Mobile, desktop, web" },
             ],
           },
@@ -86,30 +91,32 @@ export const projects: Project[] = [
         id: "context",
         title: "Context",
         lead: "Make crypto feel as familiar and reliable as a regular bank account.",
+        mark: "bank account",
         body: [
-          "The goal was simple to say and hard to do: make crypto accessible and trustworthy for everyday users across Latin America. Sending an invoice, receiving a payment, moving money between fiat and crypto — all of it needed to feel as familiar and reliable as using a bank.",
+          "The goal was simple to say and hard to do: make crypto accessible and trustworthy for everyday users across Latin America. Sending an invoice, receiving a payment, moving money between fiat and crypto: all of it needed to feel as familiar and reliable as using a bank.",
         ],
         blocks: [
           {
             kind: "image",
             image: { src: ping("wallets-dashboard.png"), alt: "Ping wallets dashboard", width: 883, height: 568, fit: "contain" },
-            caption: "Wallets dashboard — fiat and stablecoin balances in one view.",
+            caption: "fiat + stablecoins, all in one view",
           },
         ],
       },
       {
         id: "problem",
         title: "Problem",
-        lead: "Crypto can feel overwhelming — especially to someone who’s never dealt with wallets, conversions or transaction flows.",
+        lead: "Crypto can feel overwhelming, especially if you’ve never dealt with wallets, conversions or transaction flows.",
         body: [
           "My job wasn’t just to make the product look clean. It was to simplify that complexity without stripping away the clarity and control people need to feel in charge of their own money.",
-          "On top of that, we started from a brandbook, and it had to become a product identity that held together across mobile, desktop and marketing — not a style guide that only looked good in a deck.",
+          "On top of that, we started from a brandbook, and it had to become a product identity that held together across mobile, desktop and marketing. Not a style guide that only looked good in a deck.",
         ],
       },
       {
         id: "approach",
         title: "Approach",
         lead: "Take every complex, unfamiliar action and break it down to one step at a time.",
+        mark: "one step at a time",
         body: [
           "Every surface came back to the same balancing act: simplicity on top, real technical complexity underneath.",
         ],
@@ -119,7 +126,7 @@ export const projects: Project[] = [
             items: [
               {
                 title: "Guided flows",
-                body: "Invoicing, payments and currency conversion, step by step — so no moment felt like a technical decision the user wasn’t ready to make.",
+                body: "Invoicing, payments and currency conversion, one step at a time, so no moment felt like a technical decision the user wasn’t ready to make.",
               },
               {
                 title: "Financial info at a glance",
@@ -127,7 +134,7 @@ export const projects: Project[] = [
               },
               {
                 title: "Speed & reliability",
-                body: "Treated as design requirements at every touchpoint, not nice-to-haves.",
+                body: "Treated as design requirements at every touchpoint, not as extras.",
               },
             ],
           },
@@ -144,7 +151,7 @@ export const projects: Project[] = [
           {
             kind: "image",
             image: { src: ping("invoice-sent.png"), alt: "Ping invoice sent confirmation", width: 1126, height: 720 },
-            caption: "Invoicing on desktop — a clear confirmation of what was sent, to whom, and for how much.",
+            caption: "what was sent, to who, how much. no guessing",
           },
         ],
       },
@@ -153,7 +160,7 @@ export const projects: Project[] = [
         title: "Design",
         lead: "From brandbook to a product identity that scales.",
         body: [
-          "The brand had to work as a product identity, not just a brandbook: structured layouts, clear hierarchy and UI patterns that support the user rather than test them — one visual language across the mobile app, desktop app and marketing site.",
+          "The brand had to work as a product identity, not just a brandbook: structured layouts, clear hierarchy and UI patterns that support the user rather than test them. One visual language across the mobile app, desktop app and marketing site.",
         ],
         blocks: [
           {
@@ -166,22 +173,23 @@ export const projects: Project[] = [
               { src: ping("icon-sheet.webp"), alt: "Ping icon sheet", width: 962, height: 1038 },
               { src: ping("color-palette.webp"), alt: "Ping color palette", width: 1236, height: 1241 },
             ],
-            caption: "Iconography and colour, built as part of the design system.",
+            caption: "icons + colour live in the system, not in a deck",
           },
         ],
       },
       {
         id: "collaboration",
         title: "Collaboration",
-        lead: "I co-led the design system alongside one of the founders.",
+        lead: "I led the design system together with one of the founders.",
+        mark: "design system",
         body: [
-          "Together we translated the brandbook into structured layouts, clear hierarchy and UI patterns — a system built to scale with the product. The goal was for someone to navigate crypto with confidence, even on their very first try.",
+          "Together we translated the brandbook into structured layouts, clear hierarchy and UI patterns, in a system built to scale with the product. The goal was for someone to navigate crypto with confidence, even on their very first try.",
         ],
       },
       {
         id: "outcome",
         title: "Outcome",
-        lead: "A cohesive, launch-ready platform — mobile app, desktop app and marketing site under one unified system.",
+        lead: "One cohesive platform, ready for launch: mobile app, desktop app and marketing site under a single system.",
         body: [
           "Managing money across fiat and crypto finally felt simple, secure and familiar. And the product did better than expected.",
         ],
@@ -191,7 +199,7 @@ export const projects: Project[] = [
             items: [
               { value: "20,000+", label: "Users" },
               { value: "$10M+", label: "Monthly volume" },
-              { value: "6 months", label: "To break-even" },
+              { value: "6 months", label: "To break even" },
             ],
           },
           {
@@ -200,7 +208,7 @@ export const projects: Project[] = [
               { src: ping("wallets-dashboard.png"), alt: "Ping desktop wallets", width: 883, height: 568, fit: "contain" },
               { src: ping("mobile-wallet.png"), alt: "Ping mobile wallet", width: 375, height: 740, fit: "contain" },
             ],
-            caption: "The same system on desktop and mobile.",
+            caption: "same system, desktop and mobile",
           },
         ],
       },
@@ -208,6 +216,7 @@ export const projects: Project[] = [
         id: "reflection",
         title: "Reflection",
         lead: "Learning the domain was part of the design work.",
+        mark: "part of the design work",
         blocks: [
           {
             kind: "quote",
@@ -223,12 +232,13 @@ export const projects: Project[] = [
     title: "Eden",
     category: "B2B SaaS / Workplace",
     summary:
-      "Office management for hybrid work — desk booking, meeting rooms, visitor access, ticketing and deliveries.",
+      "Office management for hybrid work: desk booking, meeting rooms, visitor access, ticketing and deliveries.",
     year: "2023",
     role: "Product Designer",
     company: "Eden",
     tags: ["Product Design", "B2B SaaS", "UX/UI", "Information Architecture"],
     layout: "media-right",
+    note: "adoption went up!",
     cover: { src: eden("cover.png"), alt: "Eden brand and product overview", width: 1920, height: 1080, fit: "contain" },
     sections: [
       {
@@ -236,7 +246,7 @@ export const projects: Project[] = [
         title: "Overview",
         lead: "Eden automates and simplifies office processes that are complex and bureaucratic.",
         body: [
-          "I designed B2B tools for managing hybrid workspaces: desk booking, meeting room reservations, visitor access, internal ticketing and deliveries. My focus was the redesign of the office management experience — getting more teams to actually adopt the platform instead of falling back on spreadsheets and Slack threads.",
+          "I designed B2B tools for managing hybrid workspaces: desk booking, meeting room reservations, visitor access, internal ticketing and deliveries. My focus was the redesign of the office management experience, so more teams would actually adopt the platform instead of falling back on spreadsheets and Slack threads.",
         ],
         blocks: [
           {
@@ -251,7 +261,7 @@ export const projects: Project[] = [
           {
             kind: "image",
             image: { src: eden("home-dashboard.png"), alt: "Eden home dashboard on desktop and mobile", width: 814, height: 740, fit: "contain" },
-            caption: "Home: today’s reservations, visitors and tickets in one place.",
+            caption: "today at a glance: desks, rooms, visitors, tickets",
           },
         ],
       },
@@ -260,13 +270,14 @@ export const projects: Project[] = [
         title: "Context",
         lead: "Hybrid offices were hitting problems the product hadn’t caught up with yet.",
         body: [
-          "User feedback and internal discussions kept surfacing the same pattern. When the tool didn’t fit, teams quietly went back to spreadsheets and Slack threads — and adoption stalled.",
+          "User feedback and internal discussions kept surfacing the same pattern. When the tool didn’t fit, teams quietly went back to spreadsheets and Slack threads, and adoption stalled.",
         ],
       },
       {
         id: "problem",
         title: "Problem",
         lead: "One generic form stretched to fit three different jobs.",
+        mark: "three different jobs",
         body: [
           "Desk booking, room reservations and visitor access each needed their own dedicated flow. And the existing dashboard architecture and navigation were slowing teams down: admins spent more time finding the right screen than actually managing their office.",
         ],
@@ -277,7 +288,7 @@ export const projects: Project[] = [
               { src: eden("room-reservation.png"), alt: "Eden room reservation", width: 452, height: 512, fit: "contain" },
               { src: eden("visitor-management.png"), alt: "Eden visitor management", width: 592, height: 478, fit: "contain" },
             ],
-            caption: "Dedicated flows for rooms and visitors.",
+            caption: "one flow per job, not one form for everything",
           },
         ],
       },
@@ -293,6 +304,7 @@ export const projects: Project[] = [
         id: "collaboration",
         title: "Collaboration",
         lead: "Features stopped stalling in handoff.",
+        mark: "stalling in handoff",
         body: [
           "I pushed to strengthen collaboration and documentation between design and development, which meant features started shipping faster instead of waiting on clarifications.",
         ],
