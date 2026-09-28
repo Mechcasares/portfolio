@@ -1440,30 +1440,65 @@ div:has(> #work) + .section { padding-block-start: 0; }
 @media (max-width: 719px) { .brief-row { grid-template-columns: 1fr; } }
 
 /* Crossed out word + handwritten correction */
-.corrected { position: relative; display: inline; }
+.corrected { position: relative; display: inline-block; white-space: nowrap; }
 .corrected-old { position: relative; display: inline-block; color: var(--faint); }
 .corrected-strike { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .corrected-new {
-  display: inline-block;
-  margin-left: 0.22em;
-  font-size: 0.86em;
+  position: absolute;
+  left: 6%;
+  top: 86%;
+  font-size: 0.92em;
   line-height: 1;
   color: var(--pen);
   letter-spacing: 0;
   white-space: nowrap;
-  vertical-align: baseline;
 }
+.corrected-new::before {
+  /* proofreading caret pointing up to the struck word */
+  content: "";
+  position: absolute;
+  left: 0.9em;
+  top: -0.2em;
+  width: 0.28em;
+  height: 0.28em;
+  border-left: 0.06em solid currentColor;
+  border-top: 0.06em solid currentColor;
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+.hero-title { padding-bottom: 0.95em; }
+.hero-sign {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  white-space: normal;
+  margin-top: 8px;
+  font-size: clamp(18px, 1.7vw, 24px);
+  color: var(--ink-2);
+}
+.hero-sign::before { content: "✎ "; color: var(--pen); }
 /* ─────────────────────────────────────────────────────────────
    Point of view: hand → UI → code
    ───────────────────────────────────────────────────────────── */
-.pov { padding-top: clamp(40px, 6vw, 88px); }
+.pov {
+  margin-top: clamp(80px, 10vw, 150px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 1px dashed color-mix(in srgb, var(--pen) 28%, var(--line-strong));
+}
+.pov-label {
+  color: var(--pen);
+  font-size: clamp(30px, 3.2vw, 44px);
+  transform: rotate(-2deg);
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
 .pov-statement {
   font-size: clamp(1.8rem, 3.8vw, 3.4rem);
   line-height: 1.18;
   letter-spacing: -0.035em;
   font-weight: 450;
   max-width: 24ch;
-  margin-bottom: clamp(48px, 6vw, 88px);
+  font-size: clamp(1.6rem, 3vw, 2.7rem);
+  margin-bottom: clamp(40px, 5vw, 72px);
 }
 .pov-hand {
   font-family: var(--font-hand);

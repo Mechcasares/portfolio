@@ -28,12 +28,12 @@ export const site = {
 
   hero: {
     // Rendered as: lead + [struck word] with a handwritten correction.
-    lead: "I like complicated problems. I just make them feel",
+    lead: "I like complicated problems. I make them feel",
     struck: "complicated.",
     correction: "obvious.",
     supporting:
-      "I studied **Communication**, learned **how products get built** and became a **Product Designer**. For 7+ years I’ve used **storytelling** to structure complex things until they feel obvious, then designed them next to the people who build them. Today I’m the first designer at **CFY**, an **AI powered retail** startup.",
-    note: "a communicator who learned to design products",
+      "I started in **Communication**, learned front end development and ended up designing products. **7+ years** later I still work the same way: find the story, put it in the right order, then build it with engineering until it **feels obvious**. Today I’m the first designer at **CFY**, an **AI powered retail** startup.",
+    note: "Mercedes, a communicator turned product designer",
   },
 
   // COMMUNICATION → STORYTELLING → PRODUCT → DEVELOPMENT → SIMPLICITY

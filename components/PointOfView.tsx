@@ -8,11 +8,8 @@ import { Rich } from "./Rich";
 // the style of each word changes as the idea moves toward the product.
 export function PointOfView() {
   return (
-    <section className="section container pov" aria-labelledby="pov-title">
-      <div className="section-head">
-        <h2 id="pov-title">Point of view</h2>
-        <span className="mono muted">Words → Product → Code</span>
-      </div>
+    <div className="pov" aria-label="Point of view">
+      <p className="hand pov-label">how I think:</p>
 
       <Reveal>
         <p className="pov-statement">
@@ -40,6 +37,6 @@ export function PointOfView() {
           </Fragment>
         ))}
       </ol>
-    </section>
+    </div>
   );
 }

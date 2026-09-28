@@ -4,6 +4,7 @@ import { Arrow, Note, PenFrame, Underlined } from "./hand";
 import { LocalTime } from "./LocalTime";
 import { Reveal } from "./motion";
 import { Rich } from "./Rich";
+import { PointOfView } from "./PointOfView";
 
 export function About() {
   return (
@@ -48,6 +49,7 @@ export function About() {
           </Reveal>
         </div>
       </div>
+      <PointOfView />
     </section>
   );
 }
