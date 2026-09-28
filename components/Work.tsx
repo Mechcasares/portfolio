@@ -36,14 +36,14 @@ function FeatureStory({ p }: { p: Project }) {
             <Tags tags={p.tags} />
           </div>
         </Reveal>
-        <ParallaxMedia className="ratio-16-10 m-tall">
-          <Visual visual={p.cover} priority sizes="(min-width: 1440px) 1344px, 100vw" />
+        <ParallaxMedia className="ratio-16-9">
+          <Visual image={p.cover} priority sizes="(min-width: 1440px) 1344px, 100vw" />
         </ParallaxMedia>
         <Reveal className="grid story-foot">
           <p className="story-summary">{p.summary}</p>
           <dl className="story-facts">
             <dt>Role</dt><dd>{p.role}</dd>
-            <dt>Team</dt><dd>{p.team}</dd>
+            <dt>Company</dt><dd>{p.company}</dd>
           </dl>
           <div className="story-foot-cta">
             <Cta />
@@ -61,8 +61,8 @@ function SideStory({ p }: { p: Project }) {
       <Link href={`/work/${p.slug}`} className="story-link">
         <div className="grid story-body">
           <Reveal className="story-media" y={32}>
-            <ParallaxMedia className="ratio-4-3">
-              <Visual visual={p.cover} sizes="(min-width: 720px) 66vw, 100vw" />
+            <ParallaxMedia className="ratio-16-9">
+              <Visual image={p.cover} sizes="(min-width: 720px) 66vw, 100vw" />
             </ParallaxMedia>
           </Reveal>
           <Drift className="story-text" distance={28}>
@@ -78,29 +78,6 @@ function SideStory({ p }: { p: Project }) {
   );
 }
 
-function BandStory({ p }: { p: Project }) {
-  return (
-    <Reveal className="story story--band">
-      <Link href={`/work/${p.slug}`} className="story-link">
-        <div className="grid story-body">
-          <span className="mono story-index">{p.index}</span>
-          <h3 className="story-title">{p.title}</h3>
-          <div className="story-summary" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <span className="mono status">In progress</span>
-            <span>{p.summary}</span>
-          </div>
-          <div className="story-thumb">
-            <div className="media ratio-16-10">
-              <div className="media-hover"><Visual visual={p.cover} sizes="25vw" /></div>
-            </div>
-          </div>
-          <span className="arrow story-band-arrow" aria-hidden="true">→</span>
-        </div>
-      </Link>
-    </Reveal>
-  );
-}
-
 export function Work() {
   return (
     <Enter delay={1.05} y={24}>
@@ -112,7 +89,6 @@ export function Work() {
         <div className="stories">
           {projects.map((p) => {
             if (p.layout === "feature") return <FeatureStory key={p.slug} p={p} />;
-            if (p.layout === "band") return <BandStory key={p.slug} p={p} />;
             return <SideStory key={p.slug} p={p} />;
           })}
         </div>

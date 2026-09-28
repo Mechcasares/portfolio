@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { site } from "@/content/site";
 import { LocalTime } from "./LocalTime";
 import { Reveal, WordReveal } from "./motion";
@@ -45,6 +46,9 @@ export function About() {
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <span>{site.location}</span>
             <LocalTime />
+          </div>
+          <div className="about-photo">
+            <Image src="/images/about/mercedes.png" alt={site.fullName} width={845} height={1163} sizes="260px" />
           </div>
         </Reveal>
         <Reveal className="about-body">

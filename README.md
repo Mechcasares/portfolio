@@ -11,12 +11,8 @@ npm run build
 ## Editing content
 
 - `content/site.ts` — name, hero copy, about, capabilities, email and links.
-- `content/projects.ts` — projects and case studies (sections 01–09).
-  Case study copy is a draft: replace it with real project facts.
-
-## Screenshots
-
-Product visuals are currently built-in mockups (`components/mockups`).
-To use real screenshots, put them in `public/images` and replace a
-`{ kind: "mock", ... }` visual with
-`{ kind: "image", src: "/images/file.png", alt: "…", width: 2400, height: 1500 }`.
+- `content/projects.ts` — projects and case studies (sections 01–09; only the
+  sections with real content are included).
+- Images live in `public/images/<project>/`. Reference them from
+  `content/projects.ts` with their real width/height; use `fit: "contain"` for
+  cut-outs and composites so they're never cropped.

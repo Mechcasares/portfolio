@@ -1,16 +1,15 @@
 // Global copy for the site. Everything here is meant to be edited.
-// TODO(maria): replace email and profile links with the real ones.
+// Don't name the current employer anywhere on the site.
 
 export const site = {
-  name: "Maria",
-  fullName: "Maria",
+  name: "Mercedes Casares",
+  fullName: "Mercedes Casares",
   role: "Product Designer",
   location: "Buenos Aires",
-  current: "Curated For You",
-  email: "hello@example.com",
+  focus: "B2B SaaS & AI",
+  email: "casaresmmercedes@gmail.com",
   links: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/" },
-    { label: "Read.cv", href: "https://read.cv/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/mercedescasares" },
   ],
 
   hero: {
@@ -25,8 +24,8 @@ export const site = {
     intro:
       "I’m a product designer who likes the unglamorous middle of the work: the moment a product has grown too many edge cases, too many settings and too many opinions, and someone has to decide what it actually is.",
     body: [
-      "Over the last seven years I’ve designed B2B tools, consumer apps and, more recently, AI-powered products — usually as the designer closest to engineering. I write specs, prototype in code when it’s faster than drawing, and care about the component library as much as the hero screen.",
-      "I’m currently at Curated For You, working on how retail teams use AI to curate and merchandise products without losing control of their brand.",
+      "I studied Communication at UCA before moving into product, and I still design with a background in front-end development — which is why I’m usually the designer closest to engineering, and why I care about the component library as much as the hero screen.",
+      "I designed B2B tools for hybrid workspaces at Eden, and worked across fintech and SaaS products at Settle Network — including Ping, which grew to 20,000+ users and $10M+ in monthly volume. Right now I’m focused on B2B SaaS and AI products.",
     ],
     principles: [
       {

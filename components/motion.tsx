@@ -111,10 +111,13 @@ export function ParallaxMedia({
   children,
   className = "",
   strength = 1,
+  style,
 }: {
   children: ReactNode;
   className?: string;
+  /** Parallax drift; 0 shows the image uncropped (no drift). */
   strength?: number;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -122,8 +125,8 @@ export function ParallaxMedia({
   const y = useTransform(scrollYProgress, [0, 1], [`${-3 * strength}%`, `${3 * strength}%`]);
 
   return (
-    <motion.div ref={ref} className={`media ${className}`} style={{ scale }}>
-      <motion.div className="media-parallax" style={{ y }}>
+    <motion.div ref={ref} className={`media ${className}`} style={{ ...style, scale }}>
+      <motion.div className={strength ? "media-parallax" : "media-still"} style={strength ? { y } : undefined}>
         <div className="media-hover">{children}</div>
       </motion.div>
     </motion.div>

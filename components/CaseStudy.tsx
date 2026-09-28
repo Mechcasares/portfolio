@@ -1,55 +1,71 @@
 import Link from "next/link";
-import { getNextProject, type Block, type Project, type Section } from "@/content/projects";
+import { getNextProject, type Block, type Img, type Project, type Section } from "@/content/projects";
 import { CaseNav } from "./CaseNav";
 import { Enter, ParallaxMedia, Reveal, WordReveal } from "./motion";
 import { Visual } from "./Visual";
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
+function Figure({ image, sizes }: { image: Img; sizes: string }) {
+  // Frame matches the image's own proportions, so screenshots are never cropped.
+  return (
+    <ParallaxMedia strength={0} style={{ aspectRatio: `${image.width} / ${image.height}` }}>
+      <Visual image={image} sizes={sizes} />
+    </ParallaxMedia>
+  );
+}
+
+function Caption({ label, text }: { label: string; text: string }) {
+  return (
+    <figcaption>
+      <span className="mono">{label}</span>
+      <span>{text}</span>
+    </figcaption>
+  );
+}
+
 function BlockView({ block, index }: { block: Block; index: number }) {
   switch (block.kind) {
-    case "mock":
     case "image":
       return (
         <figure className="cs-figure">
-          <ParallaxMedia className="ratio-16-9" strength={0.6}>
-            <Visual visual={block} sizes="(min-width: 960px) 70vw, 100vw" />
-          </ParallaxMedia>
-          {block.caption && (
-            <Reveal>
-              <figcaption>
-                <span className="mono">Fig. {num(index)}</span>
-                <span>{block.caption}</span>
-              </figcaption>
-            </Reveal>
-          )}
+          <Figure image={block.image} sizes="(min-width: 960px) 70vw, 100vw" />
+          {block.caption && <Caption label={`Fig. ${num(index)}`} text={block.caption} />}
         </figure>
       );
-    case "flow":
+    case "gallery":
+      return (
+        <figure className="cs-figure">
+          <div className={`gallery gallery--${Math.min(block.images.length, 3)}`}>
+            {block.images.map((img, i) => (
+              <Reveal key={img.src} delay={i * 0.08}>
+                <Figure image={img} sizes="(min-width: 960px) 35vw, 100vw" />
+              </Reveal>
+            ))}
+          </div>
+          {block.caption && <Caption label={`Fig. ${num(index)}`} text={block.caption} />}
+        </figure>
+      );
+    case "stats":
       return (
         <Reveal>
-          <figure className="cs-figure">
-            <ol className="flow">
-              {block.steps.map((s, i) => (
-                <li key={s.label} className="flow-step">
-                  <span className="mono">
-                    <span>{num(i)}</span>
-                    {i < block.steps.length - 1 && <span aria-hidden="true">→</span>}
-                  </span>
-                  <div>
-                    <h4>{s.label}</h4>
-                    <p>{s.note}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            {block.caption && (
-              <figcaption>
-                <span className="mono">Flow</span>
-                <span>{block.caption}</span>
-              </figcaption>
-            )}
-          </figure>
+          <dl className="stats">
+            {block.items.map((st) => (
+              <div key={st.label} className="stat">
+                <dd className="stat-value">{st.value}</dd>
+                <dt className="mono muted">{st.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+      );
+    case "shipped":
+      return (
+        <Reveal>
+          <p className="mono muted" style={{ marginBottom: 12 }}>Shipped</p>
+          <ul className="shipped">
+            {block.items.map((it) => <li key={it}>{it}</li>)}
+          </ul>
         </Reveal>
       );
     case "list":
@@ -120,7 +136,7 @@ export function CaseStudy({ project }: { project: Project }) {
   const facts = [
     ["Role", project.role],
     ["Year", project.year],
-    ["Team", project.team],
+    ["Company", project.company],
     ["Focus", project.tags.join(", ")],
   ];
 
@@ -135,7 +151,6 @@ export function CaseStudy({ project }: { project: Project }) {
         <Enter delay={0.12} className="cs-eyebrow mono">
           <span>{project.index}</span>
           <span>{project.category}</span>
-          {project.status === "in-progress" && <span className="status">In progress</span>}
         </Enter>
         <h1 className="cs-title">
           <WordReveal text={project.title} delay={0.18} stagger={0.06} onMount />
@@ -154,8 +169,8 @@ export function CaseStudy({ project }: { project: Project }) {
       </header>
 
       <Enter delay={0.7} y={32} className="container cs-cover">
-        <ParallaxMedia className="ratio-16-10 m-tall" strength={0.8}>
-          <Visual visual={project.cover} priority sizes="(min-width: 1440px) 1344px, 100vw" />
+        <ParallaxMedia className="ratio-16-9" strength={0.8}>
+          <Visual image={project.cover} priority sizes="(min-width: 1440px) 1344px, 100vw" />
         </ParallaxMedia>
       </Enter>
 

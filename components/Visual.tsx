@@ -1,24 +1,17 @@
 import Image from "next/image";
-import type { Visual as VisualType } from "@/content/projects";
-import { Mock } from "./mockups";
+import type { Img } from "@/content/projects";
 
-// Renders either a real screenshot or a built-in mockup, filling its frame.
-export function Visual({ visual, priority = false, sizes = "100vw" }: { visual: VisualType; priority?: boolean; sizes?: string }) {
-  if (visual.kind === "image") {
-    return (
-      <Image
-        src={visual.src}
-        alt={visual.alt}
-        width={visual.width}
-        height={visual.height}
-        sizes={sizes}
-        priority={priority}
-      />
-    );
-  }
+// A real screenshot filling its frame. `contain` images sit on the canvas with breathing room.
+export function Visual({ image, priority = false, sizes = "100vw" }: { image: Img; priority?: boolean; sizes?: string }) {
   return (
-    <div role="img" aria-label={visual.caption ?? "Product interface"} style={{ width: "100%", height: "100%" }}>
-      <Mock name={visual.mock} />
-    </div>
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      sizes={sizes}
+      priority={priority}
+      className={image.fit === "contain" ? "img-contain" : "img-cover"}
+    />
   );
 }

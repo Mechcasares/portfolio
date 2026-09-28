@@ -10,7 +10,7 @@ export function Hero() {
         <span className="sep">·</span>
         <span>{site.role}</span>
         <span className="sep">·</span>
-        <span>Currently at {site.current}</span>
+        <span>{site.focus}</span>
       </Enter>
 
       <h1 id="hero-title" className="hero-title">
@@ -27,7 +27,7 @@ export function Hero() {
         <Enter delay={0.95} className="hero-cue mono">
           <a href="#work" style={{ display: "inline-flex", gap: 12, alignItems: "center" }} className="hero-cue">
             <span className="arrow" aria-hidden="true">↓</span>
-            Selected work, 2021 — 2026
+            Selected work
           </a>
         </Enter>
       </div>
