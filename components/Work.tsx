@@ -5,7 +5,6 @@ import { roughArrow } from "@/lib/rough";
 import { Visual } from "./Visual";
 import { Rich } from "./Rich";
 import { Badge } from "./Badge";
-import { Scope } from "./Scope";
 import { Current } from "./Current";
 
 function Tags({ tags }: { tags: string[] }) {
@@ -82,7 +81,6 @@ function FeatureStory({ p }: { p: Project }) {
         </div>
         <Reveal className="grid story-foot">
           <p className="story-summary"><Rich text={p.summary} /></p>
-          <div className="story-scope"><Scope p={p} compact /></div>
           <div className="story-foot-cta">
             <Cta />
           </div>
@@ -108,7 +106,7 @@ function SideStory({ p }: { p: Project }) {
             <span className="mono story-index">{p.index} / {p.category}</span>
             <Title p={p} />
             <p className="story-summary"><Rich text={p.summary} /></p>
-            <Scope p={p} compact />
+            <Tags tags={p.tags} />
             <div style={{ marginTop: 8 }}><Cta /></div>
           </Drift>
         </div>
