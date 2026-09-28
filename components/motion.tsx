@@ -44,6 +44,7 @@ export function Reveal({
   className,
   amount = 0.2,
   as = "div",
+  style,
 }: {
   children: ReactNode;
   delay?: number;
@@ -51,11 +52,13 @@ export function Reveal({
   className?: string;
   amount?: number;
   as?: "div" | "li";
+  style?: React.CSSProperties;
 }) {
   const Tag = motion[as];
   return (
     <Tag
       className={className}
+      style={style}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}

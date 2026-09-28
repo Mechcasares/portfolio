@@ -16,6 +16,8 @@ export type Img = {
 export type Block =
   | { kind: "image"; image: Img; caption?: string }
   | { kind: "gallery"; images: Img[]; caption?: string }
+  /** A large desktop shot with a phone overlapping its corner. */
+  | { kind: "composite"; main: Img; overlay: Img; caption?: string }
   | { kind: "list"; items: { title: string; body: string }[] }
   | { kind: "quote"; text: string }
   | { kind: "facts"; items: { label: string; value: string }[] }
@@ -109,7 +111,7 @@ export const projects: Project[] = [
         lead: "Crypto can feel overwhelming, especially if you’ve never dealt with wallets, conversions or transaction flows.",
         body: [
           "My job wasn’t just to make the product look clean. It was to simplify that complexity without stripping away the clarity and control people need to feel in charge of their own money.",
-          "On top of that, we started from a brandbook, and it had to become a product identity that held together across mobile, desktop and marketing. Not a style guide that only looked good in a deck.",
+          "On top of that, we started from a brandbook that had to become a product identity that held together across mobile, desktop and marketing. Not a style guide that only looked good in a deck.",
         ],
       },
       {
@@ -203,11 +205,9 @@ export const projects: Project[] = [
             ],
           },
           {
-            kind: "gallery",
-            images: [
-              { src: ping("wallets-dashboard.png"), alt: "Ping desktop wallets", width: 883, height: 568, fit: "contain" },
-              { src: ping("mobile-wallet.png"), alt: "Ping mobile wallet", width: 375, height: 740, fit: "contain" },
-            ],
+            kind: "composite",
+            main: { src: ping("wallets-dashboard.png"), alt: "Ping desktop wallets", width: 883, height: 568 },
+            overlay: { src: ping("mobile-wallet.png"), alt: "Ping mobile wallet", width: 375, height: 740 },
             caption: "same system, desktop and mobile",
           },
         ],
@@ -270,7 +270,7 @@ export const projects: Project[] = [
         title: "Context",
         lead: "Hybrid offices were hitting problems the product hadn’t caught up with yet.",
         body: [
-          "User feedback and internal discussions kept surfacing the same pattern. When the tool didn’t fit, teams quietly went back to spreadsheets and Slack threads, and adoption stalled.",
+          "User feedback and internal discussions kept surfacing the same pattern. When the tool didn’t fit, teams quietly went back to spreadsheets and Slack threads. Adoption stalled.",
         ],
       },
       {
@@ -295,9 +295,9 @@ export const projects: Project[] = [
       {
         id: "approach",
         title: "Approach",
-        lead: "Give each job its own flow, and rebuild the structure around them.",
+        lead: "Give each job its own flow, then rebuild the structure around them.",
         body: [
-          "The redesign focused on desk and room booking: dedicated flows for each job, and a rebuilt dashboard architecture and navigation so admins could get to the right place faster.",
+          "The redesign focused on desk and room booking: dedicated flows for each job plus a rebuilt dashboard architecture and navigation, so admins could get to the right place faster.",
         ],
       },
       {
@@ -312,9 +312,9 @@ export const projects: Project[] = [
       {
         id: "outcome",
         title: "Outcome",
-        lead: "Higher platform adoption, and less operational time for the teams using it every day.",
+        lead: "Higher platform adoption and less operational time for the teams using it every day.",
         body: [
-          "The redesign of the office management experience increased platform adoption, and the rebuilt dashboard and navigation cut down operational time for daily users.",
+          "The redesign of the office management experience increased platform adoption. The rebuilt dashboard and navigation cut down operational time for daily users.",
         ],
         blocks: [
           { kind: "shipped", items: ["Internal ticketing", "Desk booking", "Deliveries"] },

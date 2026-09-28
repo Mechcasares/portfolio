@@ -1,18 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/inter-tight";
-import "@fontsource/courier-prime/400.css";
-import "@fontsource/courier-prime/700.css";
-import "@fontsource/reenie-beanie/400.css";
+import "@fontsource-variable/caveat";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { MotionProvider } from "@/components/motion";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: {
-    default: `${site.name} · ${site.role}`,
-    template: `%s · ${site.name}`,
-  },
+  title: site.name,
   description: `${site.role} in ${site.location}. ${site.hero.supporting}`,
 };
 

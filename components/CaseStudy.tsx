@@ -36,12 +36,18 @@ function Lead({ text, mark, seed }: { text: string; mark?: string; seed: number 
       </p>
     );
   }
+  // Keep punctuation right after the mark glued to it, so it never wraps alone.
+  const rest = text.slice(at + mark!.length);
+  const glue = rest.match(/^[^\s]*/)?.[0] ?? "";
   return (
     <Reveal>
       <p className="cs-lead">
         {text.slice(0, at)}
-        <Underlined seed={seed} delay={0.5}>{mark}</Underlined>
-        {text.slice(at + mark!.length)}
+        <span style={{ whiteSpace: "nowrap" }}>
+          <Underlined seed={seed} delay={0.5}>{mark}</Underlined>
+          {glue}
+        </span>
+        {rest.slice(glue.length)}
       </p>
     </Reveal>
   );
@@ -57,15 +63,31 @@ function BlockView({ block, index }: { block: Block; index: number }) {
         </figure>
       );
     case "gallery":
+      // Justified row: every image keeps its proportions and all share one height,
+      // so pairs and trios read as a single, balanced strip.
       return (
         <figure className="cs-figure">
-          <div className={`gallery gallery--${Math.min(block.images.length, 3)}`}>
+          <div className="gallery">
             {block.images.map((img, i) => (
-              <Reveal key={img.src} delay={i * 0.08}>
-                <Figure image={img} sizes="(min-width: 960px) 35vw, 100vw" />
+              <Reveal key={img.src} delay={i * 0.08} className="gallery-item" style={{ flexGrow: img.width / img.height, flexBasis: 0 }}>
+                <Figure image={img} sizes="(min-width: 960px) 40vw, 100vw" />
               </Reveal>
             ))}
           </div>
+          {block.caption && <Caption text={block.caption} seed={index * 7 + 3} />}
+        </figure>
+      );
+    case "composite":
+      return (
+        <figure className="cs-figure">
+          <Reveal className="composite">
+            <div className="composite-main">
+              <Visual image={block.main} sizes="(min-width: 960px) 55vw, 90vw" />
+            </div>
+            <div className="composite-overlay">
+              <Visual image={block.overlay} sizes="(min-width: 960px) 18vw, 40vw" />
+            </div>
+          </Reveal>
           {block.caption && <Caption text={block.caption} seed={index * 7 + 3} />}
         </figure>
       );

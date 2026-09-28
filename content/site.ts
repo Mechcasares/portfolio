@@ -1,5 +1,5 @@
 // Global copy for the site. Everything here is meant to be edited.
-// House rules: don't name the current employer, and no dashes in the copy.
+// House rules: don't name the current employer. No dashes and no comma before "and" in the copy.
 
 export const site = {
   name: "Mercedes Casares",
@@ -48,9 +48,9 @@ export const site = {
       { label: "Background", value: "Front end development" },
       { label: "Focus", value: "B2B SaaS and AI products" },
     ],
-    who: "A product designer who likes the messy middle of the work: the moment a product has too many edge cases, too many settings and too many opinions, and someone has to decide what it actually is.",
+    who: "A product designer who likes the messy middle of the work: the moment a product has too many edge cases, settings and opinions, when someone has to decide what it actually is.",
     body: [
-      "I designed B2B tools for hybrid workspaces at Eden, and worked on fintech and SaaS products at Settle Network, including Ping, which grew to 20,000+ users and $10M+ in monthly volume.",
+      "I designed B2B tools for hybrid workspaces at Eden. After that I worked on fintech and SaaS products at Settle Network, including Ping, which grew to 20,000+ users and $10M+ in monthly volume.",
       "Coming from front end development, I’m usually the designer closest to engineering. I care about the component library as much as the hero screen.",
     ],
   },
