@@ -24,7 +24,7 @@ export function About() {
         <Reveal className="about-photo" y={16}>
           <PenFrame />
           <div className="about-photo-img">
-            <Image src="/images/about/mercedes-bw.webp" alt={site.fullName} width={2000} height={2000} sizes="(min-width: 720px) 34vw, 100vw" />
+            <Image src="/images/about/mercedes.jpg" alt={site.fullName} width={1400} height={1400} unoptimized />
           </div>
           <Note delay={1.4}>hi! that’s me</Note>
         </Reveal>
