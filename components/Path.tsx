@@ -25,15 +25,18 @@ const art: Record<string, Art> = {
     pencil: [roughLine(44, 20, 28, 36, 11, 0.6) + " " + roughLine(28, 36, 44, 52, 12, 0.6), roughLine(76, 20, 92, 36, 13, 0.6) + " " + roughLine(92, 36, 76, 52, 14, 0.6)],
     pen: [roughLine(66, 16, 54, 56, 15, 0.6)],
   },
-  // UX/UI: a wireframe, the key action circled.
+  // UX/UI: a flow. One screen leads to the next.
   wire: {
-    pencil: [roughRect(20, 8, 80, 56, 16, 3), roughLine(30, 22, 80, 22, 17, 1), roughLine(30, 32, 66, 32, 18, 1), roughRect(38, 42, 44, 12, 19, 2)],
-    pen: [roughEllipse(60, 48, 30, 13, 20)],
+    pencil: [
+      roughRect(10, 12, 38, 50, 16, 2), roughLine(16, 24, 40, 24, 17, 0.5), roughRect(16, 44, 24, 8, 18, 1),
+      roughRect(72, 12, 38, 50, 19, 2), roughLine(78, 24, 102, 24, 20, 0.5), roughLine(78, 32, 96, 32, 21, 0.5),
+    ],
+    pen: [roughArrow(44, 48, 74, 30, -0.25, 22)],
   },
-  // Product Design: a product in someone's hands. A phone, and a tap on the action.
+  // Product Design: where users, business and technology overlap. That spot is the job.
   product: {
-    pencil: [roughRect(42, 4, 36, 64, 21, 2), roughLine(54, 10, 66, 10, 22, 0.4), roughLine(48, 22, 72, 22, 23, 0.8), roughLine(48, 30, 66, 30, 24, 0.8), roughRect(48, 48, 24, 9, 25, 1)],
-    pen: [roughEllipse(60, 52.5, 20, 11, 26, 1.05), roughArrow(98, 70, 76, 56, 0.2, 27)],
+    pencil: [roughEllipse(46, 28, 22, 22, 23, 1.04), roughEllipse(74, 28, 22, 22, 24, 1.04), roughEllipse(60, 50, 22, 22, 25, 1.04)],
+    pen: [roughEllipse(60, 36, 5, 5, 26, 1.1), roughLine(59, 36, 61, 36.5, 27, 0.2)],
   },
 };
 
