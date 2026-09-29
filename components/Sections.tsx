@@ -8,6 +8,11 @@ import { Path } from "./Path";
 export function About() {
   return (
     <section id="about" className="section container" aria-labelledby="about-title">
+      <div className="section-head">
+        <h2 id="about-title">About me</h2>
+        <span className="mono muted">Buenos Aires, Argentina</span>
+      </div>
+
       <div className="grid about-sheet">
         <Reveal className="about-photo" y={16}>
           <PenFrame />
@@ -19,7 +24,7 @@ export function About() {
 
         <div className="about-card">
           <Reveal>
-            <h2 id="about-title" className="about-title">{site.about.title}</h2>
+            <p className="about-title" aria-hidden="true">{site.about.title}</p>
           </Reveal>
           <Reveal className="about-body">
             {site.about.body.map((b) => (
