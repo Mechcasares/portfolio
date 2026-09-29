@@ -5,6 +5,7 @@
 export const site = {
   name: "Mercedes Casares",
   fullName: "Mercedes Casares",
+  handle: "mcasares",
   role: "Staff Product Designer",
   location: "Buenos Aires",
   current: {

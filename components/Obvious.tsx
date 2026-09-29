@@ -1,6 +1,8 @@
+"use client";
+
 import { site } from "@/content/site";
 import { roughArrow, roughEllipse, roughLine, roughRect } from "@/lib/rough";
-import { Stroke } from "./hand";
+import { motion, type Variants } from "motion/react";
 import { Reveal } from "./motion";
 import { Rich } from "./Rich";
 
@@ -29,6 +31,34 @@ const doodles: Record<string, { pencil: string[]; pen: string[] }> = {
   },
 };
 
+// The whole card draws as one sequence once the card is on screen: pencil first,
+// then the red pen. Triggering per stroke made small screens draw in fragments.
+const draw = (i: number): Variants => ({
+  hidden: { pathLength: 0, opacity: 0 },
+  shown: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { pathLength: { duration: 0.6, ease: [0.65, 0, 0.35, 1] as const, delay: i * 0.14 }, opacity: { duration: 0.01, delay: i * 0.14 } },
+  },
+});
+
+function Doodle({ pencil, pen }: { pencil: string[]; pen: string[] }) {
+  return (
+    <motion.svg viewBox="0 0 160 120" aria-hidden="true" initial="hidden" whileInView="shown" viewport={{ once: true, amount: 0.6 }}>
+      <g className="pencil">
+        {pencil.map((d, j) => (
+          <motion.path key={j} d={d} variants={draw(j)} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
+        ))}
+      </g>
+      <g className="pen">
+        {pen.map((d, j) => (
+          <motion.path key={j} d={d} variants={draw(pencil.length + 1 + j)} fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" />
+        ))}
+      </g>
+    </motion.svg>
+  );
+}
+
 export function Obvious() {
   const o = site.obvious;
   return (
@@ -45,14 +75,7 @@ export function Obvious() {
         <ul className="obvious-items">
           {o.items.map((it, i) => (
             <Reveal as="li" key={it.key} className="obvious-item" delay={i * 0.08}>
-              <svg viewBox="0 0 160 120" aria-hidden="true">
-                <g className="pencil">
-                  {doodles[it.key].pencil.map((d, j) => <Stroke key={j} d={d} delay={0.1 + j * 0.12} duration={0.7} width={1.8} />)}
-                </g>
-                <g className="pen">
-                  {doodles[it.key].pen.map((d, j) => <Stroke key={j} d={d} delay={0.9 + j * 0.15} duration={0.6} width={2.6} />)}
-                </g>
-              </svg>
+              <Doodle pencil={doodles[it.key].pencil} pen={doodles[it.key].pen} />
               <span className="obvious-label">{it.label}</span>
             </Reveal>
           ))}

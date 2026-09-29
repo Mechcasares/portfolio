@@ -8,9 +8,11 @@ export function Hero() {
     <section className="hero container" aria-labelledby="hero-title">
       <Enter delay={0.1} className="hero-role">
         <span className="dot" aria-hidden="true" />
-        <span className="hero-role-title">{site.current.role}</span>
-        <span className="hero-role-at">at {site.current.name} ({site.current.short})</span>
-        <span className="hero-role-where mono">{site.location}</span>
+        <span className="hero-role-text">
+          <strong className="hero-role-title">{site.current.role}</strong> at {site.current.name} ({site.current.short})
+        </span>
+        <span className="hero-role-sep" aria-hidden="true">·</span>
+        <span className="hero-role-where">{site.location}</span>
       </Enter>
 
       <h1 id="hero-title" className="hero-title">
