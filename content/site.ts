@@ -5,21 +5,19 @@
 export const site = {
   name: "Mercedes Casares",
   fullName: "Mercedes Casares",
-  role: "Product Designer",
+  role: "Staff Product Designer",
   location: "Buenos Aires",
-  focus: "B2B SaaS & AI",
   current: {
     short: "CFY",
     name: "Curated For You",
-    role: "First Product Designer",
-    what: "AI powered retail personalization",
+    role: "Staff Product Designer",
+    what: "AI for retail",
     blurb:
-      "I’m the **first product designer** at Curated For You, an AI platform that helps retailers like REVOLVE and Saks Off Fifth turn data and real world context into **shoppable stories**. I built the **design system** from zero and redesigned workflows that cut **manual product management by 25%**.",
+      "CFY uses **AI** to help retailers like REVOLVE and Saks Off Fifth decide what to show, to whom and when. I design the tools behind it and the **design system** that holds them together.",
     facts: [
-      { label: "Where", value: "Austin, US · remote" },
       { label: "Stage", value: "$8.3M seed (2025)" },
-      { label: "Retail partners", value: "REVOLVE, Lulus, Saks Off Fifth" },
-      { label: "My impact", value: "**25%** less manual product work" },
+      { label: "Partners", value: "REVOLVE, Lulus, Saks Off Fifth" },
+      { label: "So far", value: "**25%** less manual product work" },
     ],
     source: { label: "CFY seed announcement (2025)", href: "https://retailboss.co/shopping-stories-curated-for-you-ai/" },
   },
@@ -29,21 +27,21 @@ export const site = {
   hero: {
     title: "I untangle complicated products.",
     supporting:
-      "I started in **Communication**, learned front end development and ended up designing products. **7+ years** later I still work the same way: find the story, put it in the right order, then build it with engineering until it **feels obvious**. Today I’m the first designer at **CFY**, an **AI powered retail** startup.",
+      "**Communication** taught me to tell a story. **Code** taught me how things get built. Product design is where I get to use both, to make **complex things feel simple**.",
   },
 
   // COMMUNICATION → STORYTELLING → PRODUCT → DEVELOPMENT → SIMPLICITY
   chain: [
-    { word: "Communication", body: "Where I started. I studied it at UCA and never stopped using it." },
-    { word: "Storytelling", body: "Putting information in the **right order** so people follow it without effort." },
-    { word: "Product", body: "Connecting **user needs, business goals** and technology into one experience." },
-    { word: "Development", body: "Knowing **how it gets built**. I talk constraints with engineers and sometimes write the code." },
-    { word: "Simplicity", body: "The point of all of it: it **just makes sense**." },
+    { word: "Communication", body: "Where I started." },
+    { word: "Storytelling", body: "The **right order** makes anything easier to follow." },
+    { word: "Product", body: "Users, business and tech in **one decision**." },
+    { word: "Development", body: "I know **how it gets built**." },
+    { word: "Simplicity", body: "The goal: it **just makes sense**." },
   ],
 
   obvious: {
     title: "Usability isn’t only about screens.",
-    body: "A handle that tells you to pull. A sign you only need to read once. Instructions you follow without thinking. They **don’t make you think** about how they work. **They just make sense.** That’s the bar I design for.",
+    body: "A handle that says pull. A sign you read once. Good things **don’t make you think**. That’s the bar.",
     items: [
       { key: "door", label: "A handle that says pull" },
       { key: "sign", label: "A sign you read once" },
@@ -53,30 +51,25 @@ export const site = {
   },
 
   process: [
-    { title: "Complex", body: "Start where it’s messy: **too many rules**, edge cases and opinions." },
-    { title: "Structure", body: "Find the **real order** of things. Most of the work is figuring out what the problem actually is." },
-    { title: "Communicate", body: "Tell it as a story: flows, words and **clear hierarchy**." },
-    { title: "Simplify", body: "Cut what doesn’t help. Fewer, **stronger patterns**, built with engineering." },
+    { title: "Complex", body: "Start where it’s messy: **too many rules** and opinions." },
+    { title: "Structure", body: "Find the **real order**. That’s most of the work." },
+    { title: "Communicate", body: "Tell it as a story, with a **clear hierarchy**." },
+    { title: "Simplify", body: "Cut what doesn’t help. Build it **with engineering**." },
     { title: "Obvious", body: "Ship something people **don’t have to think about**." },
   ],
 
   about: {
     title: "about me:",
-    facts: [
-      { label: "Name", value: "Mercedes Casares" },
-      { label: "Based in", value: "Buenos Aires, Argentina" },
-      { label: "Experience", value: "7+ years in product design" },
-      { label: "Studied", value: "Communication at UCA" },
-      { label: "Background", value: "Front end development" },
-      { label: "Now", value: "First Product Designer at CFY (AI retail)" },
-      { label: "Focus", value: "B2B SaaS and AI products" },
-    ],
-    who: "A **communicator who learned to design products**, understands how they get built and is a little obsessed with making **complicated things feel simple**.",
     body: [
-      "Right now I’m the first designer at **Curated For You (CFY)**, an AI powered retail startup, where I set up the design system and helped cut **manual product management tasks by 25%**.",
-      "Before CFY I worked on **fintech and SaaS products** at Settle Network, including Ping (YC S22), which grew to **20,000+ users and $10M+ in monthly volume**. Earlier I designed **B2B tools for hybrid workspaces** at Eden (YC S15).",
-      "Coming from front end development, I’m usually **the designer closest to engineering**. I care about the component library as much as the hero screen.",
+      "I studied **Communication**, spent time writing code and found product design somewhere in between. It’s the one job where **storytelling, systems and technology** fit together.",
+      "I like the messy part: too many rules, too many opinions. I work **close to product and engineering** and keep going until it feels obvious.",
     ],
+    experience: [
+      { when: "Now", role: "Staff Product Designer", where: "Curated For You (CFY)", note: "AI for retail" },
+      { when: "Before", role: "Product Designer", where: "Settle Network", note: "Ping, YC S22" },
+      { when: "Earlier", role: "Product Designer", where: "Eden", note: "YC S15, workplace SaaS" },
+    ],
+    more: "Want the full story?",
   },
 };
 

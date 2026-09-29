@@ -10,7 +10,7 @@ import { plain } from "@/components/Rich";
 
 export const metadata: Metadata = {
   title: site.name,
-  description: `${site.role} in ${site.location}. ${plain(site.hero.supporting)}`,
+  description: `${site.role} at ${site.current.name}, ${site.location}. ${plain(site.hero.supporting)}`,
 };
 
 export const viewport: Viewport = {

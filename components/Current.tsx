@@ -13,10 +13,10 @@ export function Current() {
           <span className="now-pulse" aria-hidden="true" /> Currently
         </span>
         <p className="now-title">
-          {c.role} at{" "}
+          <strong>{c.role}</strong> at{" "}
           <Circled seed={19} delay={0.5}>{c.name}</Circled>
         </p>
-        <Note delay={1.1} className="now-note">AI x retail, in production</Note>
+        <Note delay={1.1} className="now-note">where I am now</Note>
       </div>
       <p className="now-blurb"><Rich text={c.blurb} /></p>
       <dl className="now-facts">
@@ -28,7 +28,7 @@ export function Current() {
         ))}
       </dl>
       <p className="now-foot">
-        Happy to walk through this work in a call.{" "}
+        Happy to walk you through it on a call.{" "}
         <a href={c.source.href} target="_blank" rel="noreferrer">{c.source.label} ↗</a>
       </p>
     </Reveal>

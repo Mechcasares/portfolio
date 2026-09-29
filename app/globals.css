@@ -1468,80 +1468,50 @@ div:has(> #work) + .section { padding-block-start: 0; }
 }
 .hero-sign::before { content: "✎ "; color: var(--pen); }
 /* ─────────────────────────────────────────────────────────────
-   Point of view: hand → UI → code
+   How I think: one typeface, hierarchy by size, weight and space
    ───────────────────────────────────────────────────────────── */
+.code-label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--pen);
+  margin-bottom: 18px;
+}
 .pov {
   margin-top: clamp(80px, 10vw, 150px);
-  padding-top: clamp(32px, 4vw, 48px);
-  border-top: 1px dashed color-mix(in srgb, var(--pen) 28%, var(--line-strong));
-}
-.pov-label {
-  color: var(--pen);
-  font-size: clamp(30px, 3.2vw, 44px);
-  transform: rotate(-2deg);
-  margin-bottom: clamp(20px, 3vw, 36px);
+  padding-top: clamp(28px, 3vw, 40px);
+  border-top: 1px solid var(--line-strong);
 }
 .pov-statement {
-  font-size: clamp(1.8rem, 3.8vw, 3.4rem);
-  line-height: 1.18;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.15;
   letter-spacing: -0.035em;
   font-weight: 450;
-  max-width: 24ch;
-  font-size: clamp(1.6rem, 3vw, 2.7rem);
-  margin-bottom: clamp(40px, 5vw, 72px);
+  max-width: 22ch;
+  margin-bottom: clamp(40px, 5vw, 64px);
 }
-.pov-hand {
-  font-family: var(--font-hand);
-  font-weight: 700;
-  color: var(--pen);
-  letter-spacing: 0;
-  font-size: 0.92em;
-  display: inline-block;
-  transform: rotate(-2deg);
-}
-.pov-ui {
-  font-weight: 620;
-  background: #fff;
-  border: 1px solid var(--line-strong);
-  border-radius: 10px;
-  padding: 0 0.22em 0.04em;
-  box-shadow: 0 8px 18px -12px rgba(20, 20, 19, 0.35);
-}
-.pov-code {
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  font-size: 0.72em;
-  letter-spacing: -0.02em;
-  background: var(--ink);
-  color: var(--bg);
-  border-radius: 6px;
-  padding: 0.08em 0.35em 0.12em;
-  white-space: nowrap;
-}
-.pov-code::before { content: "<"; color: var(--warm); }
-.pov-code::after { content: " />"; color: var(--warm); }
+.pov-build { font-weight: 620; color: var(--ink); white-space: nowrap; }
+.brace { color: var(--pen); font-weight: 400; padding: 0 0.04em; }
 
 .chain {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr) 48px) minmax(0, 1fr);
-  align-items: start;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
 }
-.chain-item { display: flex; flex-direction: column; gap: 10px; }
-.chain-num { color: var(--pen); }
-.chain-word { font-size: clamp(1.25rem, 1.9vw, 1.7rem); line-height: 1.1; }
-.chain-body { font-size: 14px; color: var(--muted); max-width: 22ch; }
-.chain-arrow { padding-top: 34px; }
-/* From handwritten to digital, word by word */
-.chain-item--0 .chain-word { font-family: var(--font-hand); font-weight: 700; color: var(--pen); transform: rotate(-3deg); }
-.chain-item--1 .chain-word { font-family: var(--font-hand); font-weight: 700; color: var(--ink); transform: rotate(-1deg); }
-.chain-item--2 .chain-word { font-weight: 600; letter-spacing: -0.03em; }
-.chain-item--3 .chain-word { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: clamp(1rem, 1.5vw, 1.3rem); letter-spacing: -0.02em; }
-.chain-item--3 .chain-word::before { content: "</"; color: var(--pen); }
-.chain-item--3 .chain-word::after { content: ">"; color: var(--pen); }
-.chain-item--4 .chain-word { font-weight: 600; letter-spacing: -0.03em; }
+.chain-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px 0 0;
+}
+.chain-item + .chain-item { padding-left: 20px; border-left: 1px solid var(--line); }
+.chain-num { font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.chain-word { font-size: clamp(1.1rem, 1.5vw, 1.35rem); font-weight: 560; letter-spacing: -0.025em; }
+.chain-item--last .chain-word { color: var(--pen); }
+.chain-body { font-size: 14px; color: var(--muted); line-height: 1.45; }
 @media (max-width: 959px) {
-  .chain { grid-template-columns: 1fr; gap: 6px; }
-  .chain-arrow { padding: 0 0 0 8px; transform: rotate(90deg); transform-origin: 20px 14px; height: 40px; }
-  .chain-body { max-width: 40ch; }
+  .chain { grid-template-columns: 1fr 1fr; }
+  .chain-item, .chain-item + .chain-item { padding: 16px 0; border-left: 0; border-bottom: 1px solid var(--line); }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1579,3 +1549,39 @@ div:has(> #work) + .section { padding-block-start: 0; }
     }
 /* Screenshots shown whole get soft window corners on the canvas */
 .img-contain { border-radius: 14px; filter: drop-shadow(0 18px 28px rgba(20, 20, 19, 0.14)); }
+
+/* Hero role line */
+.hero-role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin-bottom: clamp(24px, 3.4vw, 44px);
+  font-size: clamp(15px, 1.2vw, 17px);
+}
+.hero-role .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pen); align-self: center; }
+.hero-role-title { font-weight: 620; letter-spacing: -0.01em; }
+.hero-role-at { color: var(--ink-2); }
+.hero-role-where { color: var(--muted); margin-left: 8px; }
+
+/* About: short, scannable */
+.about-body { margin-top: 0; padding-top: 0; border-top: 0; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; }
+.xp { margin-top: 36px; }
+.xp-list { border-top: 1px solid var(--line); }
+.xp-list li {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+.xp-when { font-size: 12px; color: var(--faint); }
+.xp-now .xp-when { color: var(--pen); font-weight: 600; }
+.xp-role strong { font-weight: 600; }
+.xp-note { font-size: 13px; color: var(--muted); }
+@media (max-width: 719px) { .xp-list li { grid-template-columns: 64px 1fr; } .xp-note { grid-column: 2; } }
+.about-more { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; color: var(--muted); font-size: 16px; }
+.about-card { align-self: center; }
+.now-title strong { font-weight: 620; }

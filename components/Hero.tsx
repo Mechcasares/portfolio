@@ -6,13 +6,11 @@ import { Rich } from "./Rich";
 export function Hero() {
   return (
     <section className="hero container" aria-labelledby="hero-title">
-      <Enter delay={0.1} className="hero-meta mono">
+      <Enter delay={0.1} className="hero-role">
         <span className="dot" aria-hidden="true" />
-        <span>{site.location}</span>
-        <span className="sep">·</span>
-        <span>{site.role} @ {site.current.short}</span>
-        <span className="sep">·</span>
-        <span>Communication → Product</span>
+        <span className="hero-role-title">{site.current.role}</span>
+        <span className="hero-role-at">at {site.current.name} ({site.current.short})</span>
+        <span className="hero-role-where mono">{site.location}</span>
       </Enter>
 
       <h1 id="hero-title" className="hero-title">
