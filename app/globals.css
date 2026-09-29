@@ -1583,55 +1583,83 @@ div:has(> #work) + .section { padding-block-start: 0; }
 .about-title { text-align: left; margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); }
 @media (max-width: 719px) { .about-photo { position: relative; top: 0; } }
 
-/* How I got here: compact, read like a diff */
-.path { margin-top: clamp(32px, 4vw, 48px); }
-.path .code-label { margin-bottom: 10px; }
-.path-list { position: relative; border-top: 1px solid var(--line); }
-.path-list::before {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 22px;
-  bottom: 22px;
-  width: 1px;
-  background: var(--line-strong);
-}
-.path-row {
+/* How I got here: five chapters on one thread */
+.path { margin-top: clamp(56px, 7vw, 96px); }
+.path-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.path-head .code-label { margin-bottom: 0; }
+.path-hint { display: none; font-size: 13px; color: var(--muted); }
+.chapters {
   position: relative;
   display: grid;
-  grid-template-columns: 9px minmax(0, 1fr) auto;
-  gap: 2px 16px;
-  align-items: baseline;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  padding-top: 22px;
 }
-.path-node {
-  width: 9px;
-  height: 9px;
+.chapters::before {
+  /* the thread */
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 5px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--line-strong) 0 80%, var(--pen));
+}
+.ch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 14px;
+  background: #fbf9f4;
+  border: 1px solid var(--line);
+  border-radius: 4px 18px 4px 18px;
+  transition: transform 0.5s var(--ease), border-color 0.4s var(--ease);
+}
+.ch-node {
+  position: absolute;
+  top: -22px;
+  left: 16px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: var(--bg);
   border: 1.5px solid var(--line-strong);
-  align-self: center;
-  position: relative;
-  transition: border-color 0.4s var(--ease);
 }
-.path-name { font-size: 17px; font-weight: 580; letter-spacing: -0.02em; }
-.path-adds { font-size: 13px; font-weight: 600; color: var(--pen); white-space: nowrap; }
-.path-body { grid-column: 2 / -1; font-size: 14px; color: var(--muted); line-height: 1.45; }
-.path-detail { color: var(--ink-2); }
-.path-row--now .path-node { background: var(--pen); border-color: var(--pen); }
-.path-row--now .path-name { color: var(--pen); }
-@media (hover: hover) { .path-row:hover .path-node { border-color: var(--pen); } }
+.ch-art { width: 100%; height: 64px; overflow: visible; margin-bottom: 10px; }
+.ch-num { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.ch-now { font-size: 10.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--pen); padding: 2px 6px 1px; border-radius: 999px; }
+.ch-name { font-size: 17px; font-weight: 580; letter-spacing: -0.02em; margin-top: 4px; }
+.ch-where { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.ch-body { font-size: 14px; color: var(--ink-2); line-height: 1.4; margin-top: 10px; flex: 1; }
+.ch-adds { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--pen); }
+.ch--now { border-color: color-mix(in srgb, var(--pen) 45%, var(--line)); }
+.ch--now .ch-node { background: var(--pen); border-color: var(--pen); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pen) 16%, transparent); }
+.ch--now .ch-name { color: var(--pen); }
+@media (hover: hover) {
+  .ch:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+  .ch:hover .ch-node { border-color: var(--pen); }
+}
 
-.path-sum {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding-top: 14px;
-  font-size: 17px;
-  letter-spacing: -0.015em;
-}
-.path-sum-eq { color: var(--pen); font-weight: 600; width: 9px; text-align: center; }
+.path-sum { display: flex; align-items: baseline; gap: 12px; margin-top: 20px; font-size: clamp(16px, 1.5vw, 19px); letter-spacing: -0.015em; }
+.path-sum-eq { color: var(--pen); font-weight: 600; }
 .path-sum-plus { color: var(--faint); }
 .path-sum strong { font-weight: 600; }
+
+@media (max-width: 959px) {
+  .path-hint { display: inline; }
+  .chapters {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 62%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 calc(var(--gutter) * -1);
+    padding: 22px var(--gutter) 6px;
+    scroll-padding: 0 var(--gutter);
+  }
+  .chapters::-webkit-scrollbar { display: none; }
+  .chapters::before { left: var(--gutter); right: auto; width: calc(62% * 5 + 14px * 4 - 20px); }
+  .ch { scroll-snap-align: start; }
+}
 .about-more { margin-top: 28px; }

@@ -31,7 +31,6 @@ export function About() {
               <p key={b.slice(0, 24)}><Rich text={b} /></p>
             ))}
           </Reveal>
-          <Path />
           <Reveal className="about-more">
             <span>{site.about.more}</span>
             <a href={site.links[0].href} target="_blank" rel="noreferrer" className="story-cta">
@@ -40,6 +39,7 @@ export function About() {
           </Reveal>
         </div>
       </div>
+      <Path />
     </section>
   );
 }

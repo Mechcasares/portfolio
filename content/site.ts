@@ -57,11 +57,11 @@ export const site = {
     ],
     // How I got here: each stage adds one layer to the next.
     path: [
-      { stage: "Communication", detail: "Studies and digital marketing", body: "Learned to tell a story and make a complex idea land.", adds: "storytelling" },
-      { stage: "Digital", detail: "Content, campaigns and web", body: "Put those stories on screens and saw what people actually do with them.", adds: "clarity" },
-      { stage: "Development", detail: "Frontend: HTML, CSS/SASS", body: "Built interfaces myself. Now I know what’s easy, what’s hard and why.", adds: "feasibility" },
-      { stage: "UX/UI", detail: "Between design, content and product", body: "Designed flows and screens where words and interface do the same job.", adds: "structure" },
-      { stage: "Product Design", detail: "Eden · Settle Network · Staff at CFY", body: "All of it at once: problems, systems and decisions, built with engineering.", adds: "product thinking", now: true },
+      { stage: "Communication", art: "talk", where: "Studies + digital marketing", body: "Where I learned to tell a story.", adds: "storytelling" },
+      { stage: "Digital", art: "screen", where: "Content, campaigns, web", body: "Watched what people actually do.", adds: "clarity" },
+      { stage: "Development", art: "code", where: "HTML, CSS/SASS", body: "Built interfaces myself.", adds: "feasibility" },
+      { stage: "UX/UI", art: "wire", where: "Design, content, product", body: "Made words and interface work together.", adds: "structure" },
+      { stage: "Product Design", art: "ship", where: "Eden · Settle · Staff at CFY", body: "All of it, at once.", adds: "product thinking", now: true },
     ],
     sum: ["storytelling", "design", "technology", "product thinking"],
     more: "Want the full story?",
