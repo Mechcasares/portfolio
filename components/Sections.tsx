@@ -4,7 +4,7 @@ import { Arrow, Note, PenFrame, Underlined } from "./hand";
 import { LocalTime } from "./LocalTime";
 import { Reveal } from "./motion";
 import { Rich } from "./Rich";
-import { PointOfView } from "./PointOfView";
+import { Path } from "./Path";
 
 export function About() {
   return (
@@ -35,27 +35,15 @@ export function About() {
               <p key={b.slice(0, 24)}><Rich text={b} /></p>
             ))}
           </Reveal>
-          <Reveal className="xp" delay={0.1}>
-            <p className="code-label">// experience</p>
-            <ol className="xp-list">
-              {site.about.experience.map((x) => (
-                <li key={x.where} className={x.when === "Now" ? "xp-now" : undefined}>
-                  <span className="xp-when">{x.when}</span>
-                  <span className="xp-role"><strong>{x.role}</strong> · {x.where}</span>
-                  <span className="xp-note">{x.note}</span>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-          <Reveal className="about-more" delay={0.15}>
-            <span>{site.about.more}</span>
-            <a href={site.links[0].href} target="_blank" rel="noreferrer" className="story-cta">
-              <span className="label">LinkedIn</span> <span className="arrow" aria-hidden="true">→</span>
-            </a>
-          </Reveal>
         </div>
       </div>
-      <PointOfView />
+      <Path />
+      <Reveal className="about-more">
+        <span>{site.about.more}</span>
+        <a href={site.links[0].href} target="_blank" rel="noreferrer" className="story-cta">
+          <span className="label">LinkedIn</span> <span className="arrow" aria-hidden="true">→</span>
+        </a>
+      </Reveal>
     </section>
   );
 }

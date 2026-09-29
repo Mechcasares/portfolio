@@ -127,10 +127,8 @@ export function Process() {
       <div className="process-sticky">
         <div className="container process-inner">
           <div className="process-head">
-            <h2 id="process-title" className="mono">How I work</h2>
-            <p className="process-kicker">
-              From something complex to something that feels <span className="hand-inline">obvious</span>.
-            </p>
+            <h2 id="process-title">How I work</h2>
+            <span className="mono muted">Complex → Obvious</span>
           </div>
 
           <div className="process-grid">

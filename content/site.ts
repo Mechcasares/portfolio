@@ -30,15 +30,6 @@ export const site = {
       "**Communication** taught me to tell a story. **Code** taught me how things get built. Product design is where I get to use both, to make **complex things feel simple**.",
   },
 
-  // COMMUNICATION → STORYTELLING → PRODUCT → DEVELOPMENT → SIMPLICITY
-  chain: [
-    { word: "Communication", body: "Where I started." },
-    { word: "Storytelling", body: "The **right order** makes anything easier to follow." },
-    { word: "Product", body: "Users, business and tech in **one decision**." },
-    { word: "Development", body: "I know **how it gets built**." },
-    { word: "Simplicity", body: "The goal: it **just makes sense**." },
-  ],
-
   obvious: {
     title: "Usability isn’t only about screens.",
     body: "A handle that says pull. A sign you read once. Good things **don’t make you think**. That’s the bar.",
@@ -64,11 +55,15 @@ export const site = {
       "I studied **Communication**, spent time writing code and found product design somewhere in between. It’s the one job where **storytelling, systems and technology** fit together.",
       "I like the messy part: too many rules, too many opinions. I work **close to product and engineering** and keep going until it feels obvious.",
     ],
-    experience: [
-      { when: "Now", role: "Staff Product Designer", where: "Curated For You (CFY)", note: "AI for retail" },
-      { when: "Before", role: "Product Designer", where: "Settle Network", note: "Ping, YC S22" },
-      { when: "Earlier", role: "Product Designer", where: "Eden", note: "YC S15, workplace SaaS" },
+    // How I got here: each stage adds one layer to the next.
+    path: [
+      { stage: "Communication", detail: "Studies and digital marketing", body: "Learned to tell a story and make a complex idea land.", adds: "storytelling" },
+      { stage: "Digital", detail: "Content, campaigns and web", body: "Put those stories on screens and saw what people actually do with them.", adds: "clarity" },
+      { stage: "Development", detail: "Frontend: HTML, CSS/SASS", body: "Built interfaces myself. Now I know what’s easy, what’s hard and why.", adds: "feasibility" },
+      { stage: "UX/UI", detail: "Between design, content and product", body: "Designed flows and screens where words and interface do the same job.", adds: "structure" },
+      { stage: "Product Design", detail: "Eden · Settle Network · Staff at CFY", body: "All of it at once: problems, systems and decisions, built with engineering.", adds: "product thinking", now: true },
     ],
+    sum: ["storytelling", "design", "technology", "product thinking"],
     more: "Want the full story?",
   },
 };

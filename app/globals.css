@@ -492,7 +492,7 @@ ul, ol { list-style: none; }
   border-bottom: 1px solid var(--ink);
   margin-bottom: clamp(24px, 4vh, 48px);
 }
-.process-head h2 { font-size: 13px; }
+.process-head h2 { font-size: 15px; font-weight: 560; letter-spacing: -0.01em; }
 .process-kicker { font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--ink-2); }
 @media (max-width: 719px) { .process-kicker { display: none; } }
 
@@ -1467,51 +1467,12 @@ div:has(> #work) + .section { padding-block-start: 0; }
   color: var(--ink-2);
 }
 .hero-sign::before { content: "✎ "; color: var(--pen); }
-/* ─────────────────────────────────────────────────────────────
-   How I think: one typeface, hierarchy by size, weight and space
-   ───────────────────────────────────────────────────────────── */
 .code-label {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--pen);
   margin-bottom: 18px;
-}
-.pov {
-  margin-top: clamp(80px, 10vw, 150px);
-  padding-top: clamp(28px, 3vw, 40px);
-  border-top: 1px solid var(--line-strong);
-}
-.pov-statement {
-  font-size: clamp(1.6rem, 3vw, 2.6rem);
-  line-height: 1.15;
-  letter-spacing: -0.035em;
-  font-weight: 450;
-  max-width: 22ch;
-  margin-bottom: clamp(40px, 5vw, 64px);
-}
-.pov-build { font-weight: 620; color: var(--ink); white-space: nowrap; }
-.brace { color: var(--pen); font-weight: 400; padding: 0 0.04em; }
-
-.chain {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  border-top: 1px solid var(--line);
-}
-.chain-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 18px 20px 0 0;
-}
-.chain-item + .chain-item { padding-left: 20px; border-left: 1px solid var(--line); }
-.chain-num { font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
-.chain-word { font-size: clamp(1.1rem, 1.5vw, 1.35rem); font-weight: 560; letter-spacing: -0.025em; }
-.chain-item--last .chain-word { color: var(--pen); }
-.chain-body { font-size: 14px; color: var(--muted); line-height: 1.45; }
-@media (max-width: 959px) {
-  .chain { grid-template-columns: 1fr 1fr; }
-  .chain-item, .chain-item + .chain-item { padding: 16px 0; border-left: 0; border-bottom: 1px solid var(--line); }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1572,22 +1533,6 @@ div:has(> #work) + .section { padding-block-start: 0; }
 
 /* About: short, scannable */
 .about-body { margin-top: 0; padding-top: 0; border-top: 0; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; }
-.xp { margin-top: 36px; }
-.xp-list { border-top: 1px solid var(--line); }
-.xp-list li {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr) auto;
-  gap: 4px 16px;
-  align-items: baseline;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 15px;
-}
-.xp-when { font-size: 12px; color: var(--faint); }
-.xp-now .xp-when { color: var(--pen); font-weight: 600; }
-.xp-role strong { font-weight: 600; }
-.xp-note { font-size: 13px; color: var(--muted); }
-@media (max-width: 719px) { .xp-list li { grid-template-columns: 64px 1fr; } .xp-note { grid-column: 2; } }
 .about-more { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; color: var(--muted); font-size: 16px; }
 .about-card { align-self: center; }
 .now-title strong { font-weight: 620; }
@@ -1627,4 +1572,90 @@ div:has(> #work) + .section { padding-block-start: 0; }
   .obvious-label { font-size: 13.5px; line-height: 1.3; }
   /* keep How I work steps aligned on small screens */
   .process-step { transform: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   How I got here: a path read like a diff
+   ───────────────────────────────────────────────────────────── */
+.path {
+  margin-top: clamp(72px, 9vw, 130px);
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+}
+.path-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+.path-head .code-label { margin-bottom: 0; }
+.path-flow { font-size: 13px; color: var(--muted); }
+.path-flow-arrow { color: var(--faint); margin: 0 8px; }
+.path-flow-now { color: var(--ink); font-weight: 600; }
+
+.path-list { position: relative; }
+.path-list::before {
+  /* the thread that connects every stage */
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 26px;
+  bottom: 26px;
+  width: 1px;
+  background: var(--line-strong);
+}
+.path-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 11px minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2.4fr);
+  gap: 6px clamp(16px, 2.4vw, 36px);
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.4s var(--ease);
+}
+.path-row:first-child { border-top: 1px solid var(--line); }
+.path-node {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--line-strong);
+  align-self: center;
+  transition: border-color 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+.path-stage { display: flex; flex-direction: column; gap: 2px; }
+.path-name { font-size: clamp(1.15rem, 1.6vw, 1.4rem); font-weight: 560; letter-spacing: -0.025em; }
+.path-detail { font-size: 13px; color: var(--muted); }
+.path-body { font-size: 15px; color: var(--ink-2); line-height: 1.45; max-width: 46ch; }
+.path-adds { font-size: 14px; font-weight: 600; color: var(--pen); justify-self: end; white-space: nowrap; }
+.path-row--now .path-node { background: var(--pen); border-color: var(--pen); }
+.path-row--now .path-name { color: var(--pen); }
+@media (hover: hover) {
+  .path-row:hover .path-node { border-color: var(--pen); }
+}
+
+.path-sum {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 20px 0 0;
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  letter-spacing: -0.02em;
+}
+.path-sum-eq { color: var(--pen); font-weight: 600; width: 11px; text-align: center; }
+.path-sum-plus { color: var(--faint); }
+.path-sum strong { font-weight: 600; }
+
+.about-more { margin-top: clamp(36px, 4vw, 56px); }
+
+@media (max-width: 859px) {
+  .path-row { grid-template-columns: 11px minmax(0, 1fr); }
+  .path-body, .path-adds { grid-column: 2; }
+  .path-adds { justify-self: start; }
+  .path-node { align-self: start; margin-top: 8px; }
+  .path-list::before { top: 30px; }
+  .path-flow { display: none; }
 }
