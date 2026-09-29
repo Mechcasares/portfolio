@@ -16,10 +16,6 @@ export function About() {
         </span>
       </div>
 
-      <Reveal>
-        <p className="about-title" aria-hidden="true">{site.about.title}</p>
-      </Reveal>
-
       <div className="grid about-sheet">
         <Reveal className="about-photo" y={16}>
           <PenFrame />
@@ -30,20 +26,23 @@ export function About() {
         </Reveal>
 
         <div className="about-card">
+          <Reveal>
+            <p className="about-title" aria-hidden="true">{site.about.title}</p>
+          </Reveal>
           <Reveal className="about-body">
             {site.about.body.map((b) => (
               <p key={b.slice(0, 24)}><Rich text={b} /></p>
             ))}
           </Reveal>
+          <Path />
+          <Reveal className="about-more">
+            <span>{site.about.more}</span>
+            <a href={site.links[0].href} target="_blank" rel="noreferrer" className="story-cta">
+              <span className="label">LinkedIn</span> <span className="arrow" aria-hidden="true">→</span>
+            </a>
+          </Reveal>
         </div>
       </div>
-      <Path />
-      <Reveal className="about-more">
-        <span>{site.about.more}</span>
-        <a href={site.links[0].href} target="_blank" rel="noreferrer" className="story-cta">
-          <span className="label">LinkedIn</span> <span className="arrow" aria-hidden="true">→</span>
-        </a>
-      </Reveal>
     </section>
   );
 }

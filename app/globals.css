@@ -1575,87 +1575,63 @@ div:has(> #work) + .section { padding-block-start: 0; }
 }
 
 /* ─────────────────────────────────────────────────────────────
-   How I got here: a path read like a diff
+   About: photo left; text, path and link in one column
    ───────────────────────────────────────────────────────────── */
-.path {
-  margin-top: clamp(72px, 9vw, 130px);
-  padding-top: 20px;
-  border-top: 1px solid var(--ink);
-}
-.path-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px 24px;
-  margin-bottom: clamp(24px, 3vw, 40px);
-}
-.path-head .code-label { margin-bottom: 0; }
-.path-flow { font-size: 13px; color: var(--muted); }
-.path-flow-arrow { color: var(--faint); margin: 0 8px; }
-.path-flow-now { color: var(--ink); font-weight: 600; }
+.about-sheet { align-items: start; }
+.about-photo { grid-column: 1 / span 5; position: sticky; top: calc(var(--nav-h) + 32px); }
+.about-card { grid-column: 7 / span 6; align-self: start; }
+.about-title { text-align: left; margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); }
+@media (max-width: 719px) { .about-photo { position: relative; top: 0; } }
 
-.path-list { position: relative; }
+/* How I got here: compact, read like a diff */
+.path { margin-top: clamp(32px, 4vw, 48px); }
+.path .code-label { margin-bottom: 10px; }
+.path-list { position: relative; border-top: 1px solid var(--line); }
 .path-list::before {
-  /* the thread that connects every stage */
   content: "";
   position: absolute;
-  left: 5px;
-  top: 26px;
-  bottom: 26px;
+  left: 4px;
+  top: 22px;
+  bottom: 22px;
   width: 1px;
   background: var(--line-strong);
 }
 .path-row {
   position: relative;
   display: grid;
-  grid-template-columns: 11px minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2.4fr);
-  gap: 6px clamp(16px, 2.4vw, 36px);
+  grid-template-columns: 9px minmax(0, 1fr) auto;
+  gap: 2px 16px;
   align-items: baseline;
-  padding: 16px 0;
+  padding: 11px 0;
   border-bottom: 1px solid var(--line);
-  transition: background-color 0.4s var(--ease);
 }
-.path-row:first-child { border-top: 1px solid var(--line); }
 .path-node {
-  width: 11px;
-  height: 11px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--bg);
   border: 1.5px solid var(--line-strong);
   align-self: center;
-  transition: border-color 0.4s var(--ease), background-color 0.4s var(--ease);
+  position: relative;
+  transition: border-color 0.4s var(--ease);
 }
-.path-stage { display: flex; flex-direction: column; gap: 2px; }
-.path-name { font-size: clamp(1.15rem, 1.6vw, 1.4rem); font-weight: 560; letter-spacing: -0.025em; }
-.path-detail { font-size: 13px; color: var(--muted); }
-.path-body { font-size: 15px; color: var(--ink-2); line-height: 1.45; max-width: 46ch; }
-.path-adds { font-size: 14px; font-weight: 600; color: var(--pen); justify-self: end; white-space: nowrap; }
+.path-name { font-size: 17px; font-weight: 580; letter-spacing: -0.02em; }
+.path-adds { font-size: 13px; font-weight: 600; color: var(--pen); white-space: nowrap; }
+.path-body { grid-column: 2 / -1; font-size: 14px; color: var(--muted); line-height: 1.45; }
+.path-detail { color: var(--ink-2); }
 .path-row--now .path-node { background: var(--pen); border-color: var(--pen); }
 .path-row--now .path-name { color: var(--pen); }
-@media (hover: hover) {
-  .path-row:hover .path-node { border-color: var(--pen); }
-}
+@media (hover: hover) { .path-row:hover .path-node { border-color: var(--pen); } }
 
 .path-sum {
   display: flex;
   align-items: baseline;
-  gap: 14px;
-  padding: 20px 0 0;
-  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
-  letter-spacing: -0.02em;
+  gap: 12px;
+  padding-top: 14px;
+  font-size: 17px;
+  letter-spacing: -0.015em;
 }
-.path-sum-eq { color: var(--pen); font-weight: 600; width: 11px; text-align: center; }
+.path-sum-eq { color: var(--pen); font-weight: 600; width: 9px; text-align: center; }
 .path-sum-plus { color: var(--faint); }
 .path-sum strong { font-weight: 600; }
-
-.about-more { margin-top: clamp(36px, 4vw, 56px); }
-
-@media (max-width: 859px) {
-  .path-row { grid-template-columns: 11px minmax(0, 1fr); }
-  .path-body, .path-adds { grid-column: 2; }
-  .path-adds { justify-self: start; }
-  .path-node { align-self: start; margin-top: 8px; }
-  .path-list::before { top: 30px; }
-  .path-flow { display: none; }
-}
+.about-more { margin-top: 28px; }
