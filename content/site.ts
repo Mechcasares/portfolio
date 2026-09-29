@@ -56,12 +56,13 @@ export const site = {
       "I like the messy part: too many rules, too many opinions. I work **close to product and engineering** and keep going until it feels obvious.",
     ],
     // How I got here: each stage adds one layer to the next.
+    // Ordered from messy to clear: the drawings, cards and thread get cleaner at each step.
     path: [
-      { stage: "Communication", art: "talk", where: "Studies + digital marketing", body: "Where I learned to tell a story.", adds: "storytelling" },
-      { stage: "Digital", art: "screen", where: "Content, campaigns, web", body: "Watched what people actually do.", adds: "clarity" },
-      { stage: "Development", art: "code", where: "HTML, CSS/SASS", body: "Built interfaces myself.", adds: "feasibility" },
-      { stage: "UX/UI", art: "wire", where: "Design, content, product", body: "Made words and interface work together.", adds: "structure" },
-      { stage: "Product Design", art: "ship", where: "Eden · Settle · Staff at CFY", body: "All of it, at once.", adds: "product thinking", now: true },
+      { stage: "Communication", art: "talk", body: "Studied it, then marketing. Learned to tell a story.", adds: "storytelling" },
+      { stage: "Digital", art: "screen", body: "Content and web. Saw what people actually do.", adds: "clarity" },
+      { stage: "Development", art: "code", body: "HTML and CSS/SASS. Built the interfaces myself.", adds: "feasibility" },
+      { stage: "UX/UI", art: "wire", body: "Flows where words and interface work together.", adds: "structure" },
+      { stage: "Product Design", art: "product", body: "Eden, Settle, now Staff at CFY. All of it, at once.", adds: "product thinking", now: true },
     ],
     sum: ["storytelling", "design", "technology", "product thinking"],
     more: "Want the full story?",

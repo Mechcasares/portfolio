@@ -1596,27 +1596,27 @@ div:has(> #work) + .section { padding-block-start: 0; }
 .about-title { text-align: left; margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); }
 @media (max-width: 719px) { .about-photo { width: min(64%, 260px); margin-bottom: 16px; } }
 
-/* How I got here: five chapters on one thread */
+/* How I got here: five chapters, from messy to clear.
+   The progression is the design: cards straighten, borders go from sketchy
+   to solid, the thread goes from dotted to a clean line. */
 .path { margin-top: clamp(56px, 7vw, 96px); }
-.path-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.path-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 14px; }
 .path-head .code-label { margin-bottom: 0; }
-.path-hint { display: none; font-size: 13px; color: var(--muted); }
-.chapters {
+.path-scale { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.path-scale-line {
   position: relative;
+  width: clamp(60px, 10vw, 140px);
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line-strong) 0 3px, transparent 3px 8px);
+}
+.path-scale-line::after { content: ""; position: absolute; inset: 0; left: 55%; background: var(--ink-2); }
+.path-scale-end { color: var(--ink); font-weight: 600; }
+
+.chapters {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
-  padding-top: 22px;
-}
-.chapters::before {
-  /* the thread */
-  content: "";
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  top: 5px;
-  height: 1.5px;
-  background: linear-gradient(90deg, var(--line-strong) 0 80%, var(--pen));
+  gap: 16px;
+  padding-top: 24px;
 }
 .ch {
   position: relative;
@@ -1625,12 +1625,23 @@ div:has(> #work) + .section { padding-block-start: 0; }
   padding: 16px 16px 14px;
   background: #fbf9f4;
   border: 1px solid var(--line);
-  border-radius: 4px 18px 4px 18px;
-  transition: transform 0.5s var(--ease), border-color 0.4s var(--ease);
+  border-radius: 6px;
+  transition: transform 0.5s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
+/* thread segment to the next card */
+.ch::before {
+  content: "";
+  position: absolute;
+  top: -19px;
+  left: 20px;
+  right: -36px;
+  height: 0;
+  border-top: 2px dotted var(--line-strong);
+}
+.ch:last-child::before { right: 50%; }
 .ch-node {
   position: absolute;
-  top: -22px;
+  top: -24px;
   left: 16px;
   width: 11px;
   height: 11px;
@@ -1638,28 +1649,38 @@ div:has(> #work) + .section { padding-block-start: 0; }
   background: var(--bg);
   border: 1.5px solid var(--line-strong);
 }
-.ch-art { width: 100%; height: 64px; overflow: visible; margin-bottom: 10px; }
-.ch-num { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
-.ch-now { font-size: 10.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--pen); padding: 2px 6px 1px; border-radius: 999px; }
-.ch-name { font-size: 17px; font-weight: 580; letter-spacing: -0.02em; margin-top: 4px; }
-.ch-where { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
-.ch-body { font-size: 14px; color: var(--ink-2); line-height: 1.4; margin-top: 10px; flex: 1; }
-.ch-adds { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--pen); }
-.ch--now { border-color: color-mix(in srgb, var(--pen) 45%, var(--line)); }
+/* messy → clear */
+.ch--1 { transform: rotate(-2.4deg); border: 1.5px dashed var(--line-strong); border-radius: 14px 4px 18px 6px; background: transparent; }
+.ch--2 { transform: rotate(1.4deg); border-style: dashed; border-radius: 10px 4px 12px 5px; }
+.ch--3 { transform: rotate(-0.6deg); }
+.ch--2::before { border-top-style: dotted; }
+.ch--3::before { border-top-style: dashed; border-top-width: 1.5px; }
+.ch--4::before, .ch--5::before { border-top: 1.5px solid var(--ink-2); }
+.ch--5::before { border-top-color: var(--pen); }
+.ch--5 {
+  background: #fff;
+  border-color: color-mix(in srgb, var(--pen) 40%, var(--line));
+  box-shadow: 0 1px 2px rgba(20, 20, 19, 0.05), 0 16px 30px -22px rgba(20, 20, 19, 0.35);
+}
 .ch--now .ch-node { background: var(--pen); border-color: var(--pen); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pen) 16%, transparent); }
 .ch--now .ch-name { color: var(--pen); }
+
+.ch-art { width: 100%; height: 66px; overflow: visible; margin-bottom: 12px; }
+.ch-name { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 580; letter-spacing: -0.02em; }
+.ch-now { font-size: 10.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--pen); padding: 2px 6px 1px; border-radius: 999px; }
+.ch-body { font-size: 14px; color: var(--ink-2); line-height: 1.45; margin-top: 6px; flex: 1; }
+.ch-adds { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--pen); }
 @media (hover: hover) {
-  .ch:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+  .ch:hover { transform: translateY(-3px) rotate(0deg); border-color: var(--line-strong); }
   .ch:hover .ch-node { border-color: var(--pen); }
 }
 
-.path-sum { display: flex; align-items: baseline; gap: 12px; margin-top: 20px; font-size: clamp(16px, 1.5vw, 19px); letter-spacing: -0.015em; }
+.path-sum { display: flex; align-items: baseline; gap: 12px; margin-top: 22px; font-size: clamp(16px, 1.5vw, 19px); letter-spacing: -0.015em; }
 .path-sum-eq { color: var(--pen); font-weight: 600; }
 .path-sum-plus { color: var(--faint); }
 .path-sum strong { font-weight: 600; }
 
 @media (max-width: 959px) {
-  .path-hint { display: inline; }
   .chapters {
     grid-template-columns: none;
     grid-auto-flow: column;
@@ -1668,22 +1689,11 @@ div:has(> #work) + .section { padding-block-start: 0; }
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     margin: 0 calc(var(--gutter) * -1);
-    padding: 22px var(--gutter) 6px;
+    padding: 26px var(--gutter) 10px;
     scroll-padding: 0 var(--gutter);
   }
   .chapters::-webkit-scrollbar { display: none; }
-  .chapters::before { display: none; }
   .ch { scroll-snap-align: start; }
-  .ch::before {
-    /* thread segment per card, so it always spans the whole scroll */
-    content: "";
-    position: absolute;
-    top: -17px;
-    left: 16px;
-    right: -30px;
-    height: 1.5px;
-    background: var(--line-strong);
-  }
-  .ch--now::before { background: var(--pen); right: 50%; }
+  .path-scale-line { width: 44px; }
 }
 .about-more { margin-top: 28px; }
