@@ -1,105 +1,97 @@
-// Generates brand/linkedin-cover.html with the same system as the portfolio's
-// "how I got here": five chapters of the story on one thread, then → now, same
-// drawings, same labels, Inter Tight + burgundy + saffron on the paper background.
+// LinkedIn cover: an abstract piece built only from the brand's DNA (paper,
+// pencil, one burgundy pen line, saffron, a precise grid). No text, no copies of
+// the site. Left: loose, hand made, exploring. Right: exact, digital, resolved.
+// One continuous pen line crosses from one to the other.
 // Render with `node scripts/render-cover.mjs`.
 import { writeFileSync } from "node:fs";
-import { roughArrow, roughEllipse, roughLine, roughRect } from "../lib/rough.ts";
+import { roughEllipse, roughLine, roughRect } from "../lib/rough.ts";
 
 const W = 1584;
 const H = 396;
-const C = { bg: "#f4f3ef", ink: "#141413", ink2: "#3b3a37", muted: "#7a7872", faint: "#a9a69e", pencil: "#57544d", pen: "#9b1c2e", warm: "#efa93b", card: "#fbf9f4", line: "#e1ded6", lineStrong: "#cbc7bd" };
+const C = { bg: "#f4f3ef", ink: "#141413", pencil: "#57544d", faint: "#b9b5ab", pen: "#9b1c2e", warm: "#efa93b" };
 
-// Same drawings as components/Path.tsx (120×72 box).
-const art: Record<string, { pencil: string[]; pen: string[] }> = {
-  talk: { pencil: [roughRect(22, 10, 76, 40, 1, 3), roughLine(40, 50, 34, 64, 2, 0.5) + " " + roughLine(34, 64, 52, 50, 3, 0.5)], pen: [roughLine(34, 24, 84, 24, 4, 1), roughLine(34, 36, 70, 36, 5, 1)] },
-  screen: { pencil: [roughRect(16, 8, 88, 56, 6, 3), roughLine(16, 20, 104, 20, 7, 1), roughLine(28, 34, 70, 34, 8, 1), roughLine(28, 46, 60, 46, 9, 1)], pen: [roughEllipse(84, 42, 9, 9, 10, 1.05)] },
-  code: { pencil: [roughLine(44, 20, 28, 36, 11, 0.6) + " " + roughLine(28, 36, 44, 52, 12, 0.6), roughLine(76, 20, 92, 36, 13, 0.6) + " " + roughLine(92, 36, 76, 52, 14, 0.6)], pen: [roughLine(66, 16, 54, 56, 15, 0.6)] },
-  wire: {
-    pencil: [roughRect(10, 12, 38, 50, 16, 2), roughLine(16, 24, 40, 24, 17, 0.5), roughRect(16, 44, 24, 8, 18, 1), roughRect(72, 12, 38, 50, 19, 2), roughLine(78, 24, 102, 24, 20, 0.5), roughLine(78, 32, 96, 32, 21, 0.5)],
-    pen: [roughArrow(44, 48, 74, 30, -0.25, 22)],
-  },
-  product: {
-    pencil: [roughEllipse(46, 28, 22, 22, 23, 1.04), roughEllipse(74, 28, 22, 22, 24, 1.04), roughEllipse(60, 50, 22, 22, 25, 1.04)],
-    pen: [roughEllipse(60, 36, 5, 5, 26, 1.1), roughLine(59, 36, 61, 36.5, 27, 0.2)],
-  },
-};
+let seed = 7;
+const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
 
-const stages = [
-  { key: "talk", stage: "Communication", adds: "storytelling" },
-  { key: "screen", stage: "Digital", adds: "clarity" },
-  { key: "code", stage: "Development", adds: "feasibility" },
-  { key: "wire", stage: "UX/UI", adds: "structure" },
-  { key: "product", stage: "Product Design", adds: "product thinking", now: true },
-];
+// The pen line: dense scribble top left, loosening loops across the middle,
+// then a straight run into the grid, ending on the burgundy dot.
+function penLine() {
+  const pts: [number, number][] = [];
+  // scribble cluster: many small overlapping ellipses, drawn smoothly
+  const N = 900;
+  for (let i = 0; i < N; i++) {
+    const t = i / N;
+    const a = i * 0.16;
+    const r = 30 + 14 * Math.sin(i * 0.021) + 8 * Math.sin(i * 0.057);
+    const cx = 200 + t * 130 + 10 * Math.sin(i * 0.011);
+    const cy = 112 + 8 * Math.cos(i * 0.017);
+    pts.push([cx + Math.cos(a) * r * 1.35, cy + Math.sin(a * 1.03) * r * 0.85]);
+  }
+  // loosening loops: each loop wider apart and smaller, until the line runs straight
+  const loops = 520;
+  const sx = pts[pts.length - 1][0];
+  const sy = pts[pts.length - 1][1];
+  for (let i = 1; i <= loops; i++) {
+    const t = i / loops;
+    const k = Math.pow(1 - t, 1.25);
+    const a = t * 5 * Math.PI * 2;
+    const bx = sx + t * (1090 - sx);
+    const by = sy + Math.sin(t * Math.PI) * 110 + t * 20;
+    pts.push([bx - Math.sin(a) * 58 * k, by - Math.cos(a) * 46 * k + 46 * k]);
+  }
+  const f = (n: number) => n.toFixed(1);
+  let d = `M${f(pts[0][0])} ${f(pts[0][1])}`;
+  for (let i = 1; i < pts.length; i++) d += ` L${f(pts[i][0])} ${f(pts[i][1])}`;
+  const [lx, ly] = pts[pts.length - 1];
+  d += ` C ${f(lx + 60)} ${f(ly)}, ${1180} 206, 1296 206`;
+  return d;
+}
 
-// LinkedIn places the profile photo over the bottom left: the cards start after it.
-const CW = 200;
-const GAP = 24;
-const CX0 = W - 84 - (CW * 5 + GAP * 4);
-const CY = 132;
-const CH = 170;
-const TY = 104; // the thread
+// Precise dot grid on the right.
+const dots: string[] = [];
+for (let x = 1200; x <= 1528; x += 16) for (let y = 62; y <= 350; y += 16) dots.push(`<circle cx="${x}" cy="${y}" r="1.2" />`);
 
-const cards = stages.map((s, i) => {
-  const x = CX0 + i * (CW + GAP);
-  const a = art[s.key];
-  const ax = x + (CW - 120) / 2;
-  const ay = CY + 20;
-  const pencil = a.pencil.map((d) => `<path d="${d}" />`).join("");
-  const pen = a.pen.map((d) => `<path d="${d}" />`).join("");
-  return `
-  <rect x="${x}" y="${CY}" width="${CW}" height="${CH}" rx="6" fill="${s.now ? "#ffffff" : C.card}" stroke="${s.now ? C.pen : C.line}" stroke-opacity="${s.now ? 0.45 : 1}" />
-  <g transform="translate(${ax} ${ay})">
-    <g fill="none" stroke="${C.pencil}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${pencil}</g>
-    <g fill="none" stroke="${C.pen}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${pen}</g>
-  </g>
-  <text x="${x + 18}" y="${CY + 124}" class="stage${s.now ? " now" : ""}">${s.stage}</text>
-  <text x="${x + 18}" y="${CY + 150}" class="adds">+ ${s.adds}</text>
-  ${s.now
-    ? `<circle cx="${x + 20}" cy="${TY}" r="11" fill="${C.pen}" fill-opacity=".16" /><circle cx="${x + 20}" cy="${TY}" r="6.5" fill="${C.pen}" />`
-    : `<circle cx="${x + 20}" cy="${TY}" r="6" fill="${C.bg}" stroke="${C.lineStrong}" stroke-width="1.6" />`}`;
-}).join("");
+// Pencil exploration marks around the scribble: hatching, a couple of loose shapes.
+const hatch = Array.from({ length: 11 }, (_, i) => roughLine(470 + i * 9, 250, 490 + i * 9, 222, 30 + i, 0.6)).join(" ");
+const pencilMarks = [
+  roughEllipse(640, 290, 46, 40, 41, 1.12),
+  roughRect(820, 70, 70, 54, 42, 7),
+  hatch,
+  roughLine(96, 40, 150, 22, 43, 1.5),
+  roughLine(104, 56, 164, 38, 44, 1.5),
+].join(" ");
 
-const lastNode = CX0 + 4 * (CW + GAP) + 20;
+// Crisp digital marks inside the grid.
+const cross = (x: number, y: number) => `M${x - 7} ${y} H${x + 7} M${x} ${y - 7} V${y + 7}`;
 
 const html = `<!doctype html>
 <html><head><meta charset="utf-8">
-<link rel="stylesheet" href="../node_modules/@fontsource-variable/inter-tight/index.css">
 <style>
   html, body { margin: 0; background: ${C.bg}; }
   .cover { position: relative; width: ${W}px; height: ${H}px; overflow: hidden; background: ${C.bg}; }
-  .grain { position: absolute; inset: 0; opacity: .32; mix-blend-mode: multiply;
+  .grain { position: absolute; inset: 0; opacity: .34; mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.42 0 0 0 0 0.38 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   svg { position: absolute; inset: 0; }
-  text { font-family: "Inter Tight Variable", "Inter Tight", sans-serif; }
-  .label { font-size: 16px; font-weight: 500; fill: ${C.pen}; }
-  .flow { font-size: 15px; fill: ${C.muted}; }
-  .flow-now { fill: ${C.pen}; font-weight: 600; }
-  .stage { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; fill: ${C.ink}; }
-  .stage.now { fill: ${C.pen}; }
-  .adds { font-size: 14px; font-weight: 600; fill: ${C.pen}; }
-  .sum { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; fill: ${C.ink}; }
-  .plus { fill: ${C.faint}; font-weight: 400; }
-  .eq { fill: ${C.pen}; }
 </style></head>
 <body><div class="cover">
 <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-  <!-- saffron shape, same as behind the About photo -->
-  <path d="M ${W + 60} -30 C ${W - 30} -60, ${W - 150} -10, ${W - 160} 44 C ${W - 170} 96, ${W - 100} 124, ${W - 30} 110 C ${W + 40} 96, ${W + 90} 20, ${W + 60} -30 Z" fill="${C.warm}" />
+  <!-- saffron: one large organic form, crossing from loose to exact -->
+  <path d="M 980 430 C 900 380, 920 250, 1010 210 C 1100 170, 1210 190, 1270 250 C 1330 310, 1300 420, 1240 460 Z" fill="${C.warm}" />
 
-  <!-- labels -->
-  <text x="96" y="${TY - 30}" class="label">// how I got here</text>
-  <text x="96" y="${TY + 5}" class="flow">then <tspan fill="${C.faint}">→</tspan> <tspan class="flow-now">now</tspan></text>
+  <!-- the grid, and a perfect square: the digital side -->
+  <g fill="${C.faint}">${dots.join("")}</g>
+  <rect x="1360.5" y="94.5" width="112" height="112" fill="none" stroke="${C.ink}" stroke-width="1.5" />
+  <path d="${cross(1360.5, 94.5)} ${cross(1472.5, 206.5)}" stroke="${C.ink}" stroke-width="1" />
+  <line x1="1200" y1="206.5" x2="1360" y2="206.5" stroke="${C.ink}" stroke-width="1" stroke-dasharray="3 5" />
 
-  <!-- the thread -->
-  <line x1="200" y1="${TY}" x2="${lastNode}" y2="${TY}" stroke="${C.lineStrong}" stroke-width="1.6" />
-  <line x1="${lastNode}" y1="${TY}" x2="${lastNode + CW * 0.6}" y2="${TY}" stroke="${C.pen}" stroke-width="1.6" />
-  <circle cx="200" cy="${TY}" r="3" fill="${C.lineStrong}" />
+  <!-- pencil exploration -->
+  <path d="${pencilMarks}" fill="none" stroke="${C.pencil}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".8" />
 
-  ${cards}
+  <!-- the one pen line -->
+  <path d="${penLine()}" fill="none" stroke="${C.pen}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
 
-  <!-- the sum -->
-  <text x="${W - 84}" y="${H - 40}" text-anchor="end" class="sum"><tspan class="eq">= </tspan>storytelling<tspan class="plus"> + </tspan>design<tspan class="plus"> + </tspan>technology<tspan class="plus"> + </tspan>product thinking</text>
+  <!-- where it lands: a solid, exact dot -->
+  <circle cx="1296" cy="206" r="15" fill="${C.pen}" />
 </svg>
 <div class="grain"></div>
 </div></body></html>`;
