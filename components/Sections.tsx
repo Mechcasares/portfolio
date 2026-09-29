@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { site } from "@/content/site";
 import { Arrow, Note, PenFrame, Underlined } from "./hand";
-import { LocalTime } from "./LocalTime";
 import { Reveal } from "./motion";
 import { Rich } from "./Rich";
 import { Path } from "./Path";
@@ -9,13 +8,6 @@ import { Path } from "./Path";
 export function About() {
   return (
     <section id="about" className="section container" aria-labelledby="about-title">
-      <div className="section-head">
-        <h2 id="about-title">About</h2>
-        <span className="mono muted">
-          {site.location} · <LocalTime />
-        </span>
-      </div>
-
       <div className="grid about-sheet">
         <Reveal className="about-photo" y={16}>
           <PenFrame />
@@ -27,7 +19,7 @@ export function About() {
 
         <div className="about-card">
           <Reveal>
-            <p className="about-title" aria-hidden="true">{site.about.title}</p>
+            <h2 id="about-title" className="about-title">{site.about.title}</h2>
           </Reveal>
           <Reveal className="about-body">
             {site.about.body.map((b) => (
