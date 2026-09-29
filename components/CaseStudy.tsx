@@ -4,9 +4,8 @@ import { CaseNav } from "./CaseNav";
 import { Arrow, Circled, Note, Underlined } from "./hand";
 import { Enter, ParallaxMedia, Reveal, WordReveal } from "./motion";
 import { Visual } from "./Visual";
-import { Rich } from "./Rich";
+import { Rich, plain } from "./Rich";
 import { Badge } from "./Badge";
-import { Scope } from "./Scope";
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
@@ -225,23 +224,28 @@ export function CaseStudy({ project }: { project: Project }) {
         </ParallaxMedia>
       </Enter>
 
-      <section className="container cs-context" aria-label={`About ${project.title}`}>
-        <Reveal className="cs-context-card">
-          <span className="cs-context-tape" aria-hidden="true" />
-          <span className="hand cs-context-label">the project, in short</span>
-          <Scope p={project} />
-          <span className="mono cs-context-sub">About {project.company === "Settle Network" ? project.title : project.company}</span>
-          <dl className="cs-context-grid">
-            {project.about.items.map((it, i) => (
-              <div key={it.label} className="cs-context-item">
-                <dt className="mono">
-                  <span className="cs-context-num">{String(i + 1).padStart(2, "0")}</span>
-                  {it.label}
-                </dt>
-                <dd><Rich text={it.value} /></dd>
-              </div>
-            ))}
-          </dl>
+      <section className="container cs-context" aria-label={`${project.title} in short`}>
+        <Reveal className="brief2">
+          <p className="code-label">// in short</p>
+          <div className="brief2-grid">
+            <dl className="brief2-rows">
+              <div><dt>Role</dt><dd>{plain(project.roleDetail)}</dd></div>
+              <div><dt>Challenge</dt><dd>{plain(project.complexity)}</dd></div>
+              <div><dt>Approach</dt><dd>{plain(project.approach)}</dd></div>
+            </dl>
+            <ul className="brief2-outcomes" aria-label="Outcome">
+              {project.outcomes.map((o) => (
+                <li key={o.label}>
+                  <span className="brief2-value">{o.value}</span>
+                  <span className="brief2-what">{o.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="brief2-about">
+            <span className="brief2-about-name">{project.company === "Settle Network" ? project.title : project.company}</span>{" "}
+            {project.about.items.map((it) => plain(it.value)).join(" · ")}
+          </p>
         </Reveal>
       </section>
 

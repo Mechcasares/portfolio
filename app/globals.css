@@ -1585,3 +1585,33 @@ div:has(> #work) + .section { padding-block-start: 0; }
 .about-more { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; color: var(--muted); font-size: 16px; }
 .about-card { align-self: center; }
 .now-title strong { font-weight: 620; }
+
+/* Case study brief: one typeface, lines instead of boxes, numbers carry the weight */
+.brief2 { padding-top: 22px; border-top: 1px solid var(--ink); }
+.brief2-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 28px clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+.brief2-rows > div {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.brief2-rows > div:first-child { padding-top: 0; }
+.brief2-rows dt { font-size: 13px; color: var(--muted); padding-top: 3px; }
+.brief2-rows dd { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.4; letter-spacing: -0.01em; }
+.brief2-outcomes { display: flex; flex-wrap: wrap; gap: 20px 36px; }
+.brief2-outcomes li { display: flex; flex-direction: column; gap: 4px; }
+.brief2-value { font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1; letter-spacing: -0.045em; font-weight: 560; }
+.brief2-outcomes li:first-child .brief2-value { color: var(--pen); }
+.brief2-what { font-size: 13px; color: var(--muted); }
+.brief2-about { margin-top: 24px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.brief2-about-name { color: var(--ink); font-weight: 600; margin-right: 4px; }
+@media (max-width: 859px) {
+  .brief2-grid { grid-template-columns: 1fr; }
+  .brief2-rows > div { grid-template-columns: 1fr; gap: 4px; }
+}
