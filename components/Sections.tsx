@@ -19,7 +19,10 @@ export function About() {
           <div className="about-photo-img">
             <Image src="/images/about/mercedes.jpg" alt={site.fullName} width={1400} height={1400} unoptimized />
           </div>
-          <Note delay={1.4}>hi! that’s me</Note>
+          <div className="about-hi" aria-hidden="true">
+            <Arrow box={[46, 40]} from={[42, 32]} to={[8, 5]} bend={-0.3} seed={31} delay={1.2} />
+            <Note delay={1.5}>hi! that’s me</Note>
+          </div>
         </Reveal>
 
         <div className="about-card">
