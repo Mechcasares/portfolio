@@ -1578,10 +1578,11 @@ div:has(> #work) + .section { padding-block-start: 0; }
    About: photo left; text, path and link in one column
    ───────────────────────────────────────────────────────────── */
 .about-sheet { align-items: start; }
-.about-photo { grid-column: 1 / span 5; position: sticky; top: calc(var(--nav-h) + 32px); }
-.about-card { grid-column: 7 / span 6; align-self: start; }
+.about-photo { grid-column: 2 / span 3; position: relative; }
+@media (max-width: 1099px) and (min-width: 720px) { .about-photo { grid-column: 1 / span 4; } .about-card { grid-column: 6 / span 7; } }
+.about-card { grid-column: 6 / span 7; align-self: center; }
 .about-title { text-align: left; margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); }
-@media (max-width: 719px) { .about-photo { position: relative; top: 0; } }
+@media (max-width: 719px) { .about-photo { width: min(64%, 260px); margin-bottom: 16px; } }
 
 /* How I got here: five chapters on one thread */
 .path { margin-top: clamp(56px, 7vw, 96px); }
@@ -1650,7 +1651,7 @@ div:has(> #work) + .section { padding-block-start: 0; }
   .chapters {
     grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: 62%;
+    grid-auto-columns: min(72%, 280px);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -1659,7 +1660,18 @@ div:has(> #work) + .section { padding-block-start: 0; }
     scroll-padding: 0 var(--gutter);
   }
   .chapters::-webkit-scrollbar { display: none; }
-  .chapters::before { left: var(--gutter); right: auto; width: calc(62% * 5 + 14px * 4 - 20px); }
+  .chapters::before { display: none; }
   .ch { scroll-snap-align: start; }
+  .ch::before {
+    /* thread segment per card, so it always spans the whole scroll */
+    content: "";
+    position: absolute;
+    top: -17px;
+    left: 16px;
+    right: -30px;
+    height: 1.5px;
+    background: var(--line-strong);
+  }
+  .ch--now::before { background: var(--pen); right: 50%; }
 }
 .about-more { margin-top: 28px; }
