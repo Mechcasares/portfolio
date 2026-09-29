@@ -56,13 +56,13 @@ export const site = {
       "I like the messy part: too many rules, too many opinions. I work **close to product and engineering** and keep going until it feels obvious.",
     ],
     // How I got here: each stage adds one layer to the next.
-    // Ordered from messy to clear: the drawings, cards and thread get cleaner at each step.
+    // My story in five chapters, oldest to today. Each one hands a layer to the next.
     path: [
-      { stage: "Communication", art: "talk", body: "Studied it, then marketing. Learned to tell a story.", adds: "storytelling" },
-      { stage: "Digital", art: "screen", body: "Content and web. Saw what people actually do.", adds: "clarity" },
-      { stage: "Development", art: "code", body: "HTML and CSS/SASS. Built the interfaces myself.", adds: "feasibility" },
-      { stage: "UX/UI", art: "wire", body: "Flows where words and interface work together.", adds: "structure" },
-      { stage: "Product Design", art: "product", body: "Eden, Settle, now Staff at CFY. All of it, at once.", adds: "product thinking", now: true },
+      { era: "Where it started", stage: "Communication", art: "talk", body: "Studied it, then worked in marketing. Learned to tell a story.", adds: "storytelling" },
+      { era: "Going digital", stage: "Digital", art: "screen", body: "Content and web. Saw what people actually do on a screen.", adds: "clarity" },
+      { era: "Learning to build", stage: "Development", art: "code", body: "HTML and CSS/SASS. Built the interfaces myself.", adds: "feasibility" },
+      { era: "Finding design", stage: "UX/UI", art: "wire", body: "Flows where words and interface work together.", adds: "structure" },
+      { era: "Today", stage: "Product Design", art: "product", body: "Eden, Settle, now Staff at CFY. All of it, at once.", adds: "product thinking", now: true },
     ],
     sum: ["storytelling", "design", "technology", "product thinking"],
     more: "Want the full story?",

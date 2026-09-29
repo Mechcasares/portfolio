@@ -1596,21 +1596,13 @@ div:has(> #work) + .section { padding-block-start: 0; }
 .about-title { text-align: left; margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); }
 @media (max-width: 719px) { .about-photo { width: min(64%, 260px); margin-bottom: 16px; } }
 
-/* How I got here: five chapters, from messy to clear.
-   The progression is the design: cards straighten, borders go from sketchy
-   to solid, the thread goes from dotted to a clean line. */
+/* How I got here: my story in five chapters on one thread, then → now */
 .path { margin-top: clamp(56px, 7vw, 96px); }
 .path-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 14px; }
 .path-head .code-label { margin-bottom: 0; }
-.path-scale { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-.path-scale-line {
-  position: relative;
-  width: clamp(60px, 10vw, 140px);
-  height: 2px;
-  background: repeating-linear-gradient(90deg, var(--line-strong) 0 3px, transparent 3px 8px);
-}
-.path-scale-line::after { content: ""; position: absolute; inset: 0; left: 55%; background: var(--ink-2); }
-.path-scale-end { color: var(--ink); font-weight: 600; }
+.path-flow { font-size: 13px; color: var(--muted); }
+.path-flow strong { color: var(--pen); font-weight: 600; }
+.path-flow-arrow { color: var(--faint); margin: 0 4px; }
 
 .chapters {
   display: grid;
@@ -1626,19 +1618,18 @@ div:has(> #work) + .section { padding-block-start: 0; }
   background: #fbf9f4;
   border: 1px solid var(--line);
   border-radius: 6px;
-  transition: transform 0.5s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transition: transform 0.5s var(--ease), border-color 0.4s var(--ease);
 }
-/* thread segment to the next card */
+/* the thread, one segment to the next chapter */
 .ch::before {
   content: "";
   position: absolute;
   top: -19px;
   left: 20px;
   right: -36px;
-  height: 0;
-  border-top: 2px dotted var(--line-strong);
+  border-top: 1.5px solid var(--line-strong);
 }
-.ch:last-child::before { right: 50%; }
+.ch:last-child::before { right: 50%; border-top-color: var(--pen); }
 .ch-node {
   position: absolute;
   top: -24px;
@@ -1649,29 +1640,17 @@ div:has(> #work) + .section { padding-block-start: 0; }
   background: var(--bg);
   border: 1.5px solid var(--line-strong);
 }
-/* messy → clear */
-.ch--1 { transform: rotate(-2.4deg); border: 1.5px dashed var(--line-strong); border-radius: 14px 4px 18px 6px; background: transparent; }
-.ch--2 { transform: rotate(1.4deg); border-style: dashed; border-radius: 10px 4px 12px 5px; }
-.ch--3 { transform: rotate(-0.6deg); }
-.ch--2::before { border-top-style: dotted; }
-.ch--3::before { border-top-style: dashed; border-top-width: 1.5px; }
-.ch--4::before, .ch--5::before { border-top: 1.5px solid var(--ink-2); }
-.ch--5::before { border-top-color: var(--pen); }
-.ch--5 {
-  background: #fff;
-  border-color: color-mix(in srgb, var(--pen) 40%, var(--line));
-  box-shadow: 0 1px 2px rgba(20, 20, 19, 0.05), 0 16px 30px -22px rgba(20, 20, 19, 0.35);
-}
+.ch--now { background: #fff; border-color: color-mix(in srgb, var(--pen) 40%, var(--line)); }
 .ch--now .ch-node { background: var(--pen); border-color: var(--pen); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pen) 16%, transparent); }
 .ch--now .ch-name { color: var(--pen); }
-
+.ch-era { font-size: 12.5px; color: var(--muted); margin-bottom: 2px; }
 .ch-art { width: 100%; height: 66px; overflow: visible; margin-bottom: 12px; }
 .ch-name { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 580; letter-spacing: -0.02em; }
 .ch-now { font-size: 10.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--pen); padding: 2px 6px 1px; border-radius: 999px; }
 .ch-body { font-size: 14px; color: var(--ink-2); line-height: 1.45; margin-top: 6px; flex: 1; }
 .ch-adds { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--pen); }
 @media (hover: hover) {
-  .ch:hover { transform: translateY(-3px) rotate(0deg); border-color: var(--line-strong); }
+  .ch:hover { transform: translateY(-3px); border-color: var(--line-strong); }
   .ch:hover .ch-node { border-color: var(--pen); }
 }
 
@@ -1694,6 +1673,5 @@ div:has(> #work) + .section { padding-block-start: 0; }
   }
   .chapters::-webkit-scrollbar { display: none; }
   .ch { scroll-snap-align: start; }
-  .path-scale-line { width: 44px; }
 }
 .about-more { margin-top: 28px; }

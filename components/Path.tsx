@@ -2,39 +2,38 @@
 
 import { motion, type Variants } from "motion/react";
 import { site } from "@/content/site";
-import { roughEllipse, roughLine, roughRect } from "@/lib/rough";
+import { roughArrow, roughEllipse, roughLine, roughRect } from "@/lib/rough";
 
-// The section is ordered from messy to clear, and the drawings follow: the first
-// ones are loose, overdrawn pencil; each step is steadier; the last one isn't
-// sketched at all, it's a clean interface. Same idea as how I work: explore by
-// hand, end with something precise.
+// One drawing per chapter of my story, all in the same hand: pencil for the
+// object, red pen for the detail that chapter taught me.
 
 type Art = { pencil: string[]; pen: string[] };
 
 const art: Record<string, Art> = {
-  // Loose, overdrawn: a speech bubble scribbled twice.
+  // Communication: a speech bubble, the story inside it.
   talk: {
-    pencil: [
-      roughRect(20, 10, 78, 40, 1, 9),
-      roughRect(23, 12, 74, 37, 2, 7),
-      roughLine(40, 50, 32, 66, 3, 2) + " " + roughLine(32, 66, 54, 50, 4, 2),
-    ],
-    pen: [roughLine(32, 24, 86, 23, 5, 3), roughLine(32, 36, 70, 37, 6, 3)],
+    pencil: [roughRect(22, 10, 76, 40, 1, 3), roughLine(40, 50, 34, 64, 2, 0.5) + " " + roughLine(34, 64, 52, 50, 3, 0.5)],
+    pen: [roughLine(34, 24, 84, 24, 4, 1), roughLine(34, 36, 70, 36, 5, 1)],
   },
-  // Still rough, a little calmer: a screen.
+  // Digital: a screen, with what people click.
   screen: {
-    pencil: [roughRect(16, 8, 88, 56, 7, 6), roughLine(16, 20, 104, 20, 8, 2), roughLine(28, 34, 70, 34, 9, 1.6), roughLine(28, 46, 60, 46, 10, 1.6)],
-    pen: [roughEllipse(84, 42, 9, 9, 11, 1.12)],
+    pencil: [roughRect(16, 8, 88, 56, 6, 3), roughLine(16, 20, 104, 20, 7, 1), roughLine(28, 34, 70, 34, 8, 1), roughLine(28, 46, 60, 46, 9, 1)],
+    pen: [roughEllipse(84, 42, 9, 9, 10, 1.05)],
   },
-  // Steadier lines: code.
+  // Development: code.
   code: {
-    pencil: [roughLine(44, 20, 28, 36, 12, 0.5) + " " + roughLine(28, 36, 44, 52, 13, 0.5), roughLine(76, 20, 92, 36, 14, 0.5) + " " + roughLine(92, 36, 76, 52, 15, 0.5)],
-    pen: [roughLine(66, 16, 54, 56, 16, 0.3)],
+    pencil: [roughLine(44, 20, 28, 36, 11, 0.6) + " " + roughLine(28, 36, 44, 52, 12, 0.6), roughLine(76, 20, 92, 36, 13, 0.6) + " " + roughLine(92, 36, 76, 52, 14, 0.6)],
+    pen: [roughLine(66, 16, 54, 56, 15, 0.6)],
   },
-  // Almost clean: a wireframe, the button circled.
+  // UX/UI: a wireframe, the key action circled.
   wire: {
-    pencil: [roughRect(20, 8, 80, 56, 17, 1.2), roughLine(30, 22, 80, 22, 18, 0.3), roughLine(30, 32, 66, 32, 19, 0.3), roughRect(38, 42, 44, 12, 20, 0.6)],
-    pen: [roughEllipse(60, 48, 30, 13, 21, 1.04)],
+    pencil: [roughRect(20, 8, 80, 56, 16, 3), roughLine(30, 22, 80, 22, 17, 1), roughLine(30, 32, 66, 32, 18, 1), roughRect(38, 42, 44, 12, 19, 2)],
+    pen: [roughEllipse(60, 48, 30, 13, 20)],
+  },
+  // Product Design: a product in someone's hands. A phone, and a tap on the action.
+  product: {
+    pencil: [roughRect(42, 4, 36, 64, 21, 2), roughLine(54, 10, 66, 10, 22, 0.4), roughLine(48, 22, 72, 22, 23, 0.8), roughLine(48, 30, 66, 30, 24, 0.8), roughRect(48, 48, 24, 9, 25, 1)],
+    pen: [roughEllipse(60, 52.5, 20, 11, 26, 1.05), roughArrow(98, 70, 76, 56, 0.2, 27)],
   },
 };
 
@@ -65,51 +64,14 @@ function Sketch({ name }: { name: string }) {
   );
 }
 
-// Product Design: not a sketch. A small, finished interface (the same wireframe
-// from the step before, now real) and a cursor clicking its main action.
-function Product() {
-  return (
-    <motion.svg
-      className="ch-art ch-art--product"
-      viewBox="0 0 120 72"
-      aria-hidden="true"
-      initial={{ opacity: 0, scale: 0.94 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.8 }}
-      transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.15 }}
-    >
-      <rect x="20.5" y="6.5" width="79" height="59" rx="6" fill="#fff" stroke="#cbc7bd" />
-      <rect x="20.5" y="6.5" width="79" height="11" rx="6" fill="#f4f3ef" />
-      <rect x="20.5" y="12.5" width="79" height="5" fill="#f4f3ef" />
-      <circle cx="27" cy="12" r="1.6" fill="var(--pen)" />
-      <circle cx="32" cy="12" r="1.6" fill="#cbc7bd" />
-      <rect x="30" y="25" width="44" height="4" rx="2" fill="#141413" />
-      <rect x="30" y="33" width="58" height="3" rx="1.5" fill="#cbc7bd" />
-      <rect x="30" y="39" width="40" height="3" rx="1.5" fill="#cbc7bd" />
-      <rect x="30" y="48" width="36" height="10" rx="5" fill="var(--pen)" />
-      <rect x="37" y="52" width="22" height="2" rx="1" fill="#fff" />
-      <motion.g
-        initial={{ x: 18, y: 12, opacity: 0 }}
-        whileInView={{ x: 0, y: 0, opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
-        transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <path d="M60 53 L60 66 L63.6 62.6 L66.2 68 L68.4 67 L65.8 61.6 L70.6 61.4 Z" fill="#141413" stroke="#fff" strokeWidth="1" strokeLinejoin="round" />
-      </motion.g>
-    </motion.svg>
-  );
-}
-
 export function Path() {
   const { path, sum } = site.about;
   return (
     <div className="path" aria-labelledby="path-title">
       <div className="path-head">
         <p id="path-title" className="code-label">// how I got here</p>
-        <p className="path-scale" aria-hidden="true">
-          <span>messy</span>
-          <span className="path-scale-line" />
-          <span className="path-scale-end">clear</span>
+        <p className="path-flow" aria-hidden="true">
+          then <span className="path-flow-arrow">→</span> <strong>now</strong>
         </p>
       </div>
 
@@ -117,14 +79,15 @@ export function Path() {
         {path.map((c, i) => (
           <motion.li
             key={c.stage}
-            className={`ch ch--${i + 1}${c.now ? " ch--now" : ""}`}
+            className={`ch${c.now ? " ch--now" : ""}`}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="ch-node" aria-hidden="true" />
-            {c.art === "product" ? <Product /> : <Sketch name={c.art} />}
+            <Sketch name={c.art} />
+            <span className="ch-era">{c.era}</span>
             <h4 className="ch-name">
               {c.stage}
               {c.now && <span className="ch-now">now</span>}
